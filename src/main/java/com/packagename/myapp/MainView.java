@@ -12,5 +12,11 @@ public class MainView extends Div {
     public MainView() {
         getElement().executeJs("start($0)", getElement());
     }
-    
+
+    /*
+    @ClientCallable
+    public void setButtonText() {
+        getElement().executeJs("changeTestButtonName($0)", "from server");
+    }
+    */
 }

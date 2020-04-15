@@ -1,9 +1,3 @@
-export function createButton() {
-    //document.body.innerHTML = "hello world";
-    let button = document.createElement("BUTTON");
-    document.body.appendChild(button);
-}
-
 export function createHomePage() {
    let currentClassesButton = document.createElement("BUTTON");
    document.body.appendChild(currentClassesButton);
