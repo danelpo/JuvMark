@@ -8,7 +8,7 @@ import java.io.PrintWriter;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-public class RetriveCreateClassData {
+public class CreateClassDataSorting {
     static String classcode;
     static String date;
     static String savedname;
@@ -26,7 +26,7 @@ public class RetriveCreateClassData {
     public static void setSavedname() {
         savedname = classcode.concat("_").concat(date);
         csvCurriculumPath = "Data/Curriculums/" + savedname + "curriculum.csv";
-        JSONtaskpath = "Data/Tasks/" + savedname + "tasks.json";
+        JSONTaskPath = "Data/Tasks/" + savedname + "tasks.json";
     }
 
     public static void getCurriculum(String passedCurriculum) {

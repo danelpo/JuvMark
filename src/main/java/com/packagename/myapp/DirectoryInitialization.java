@@ -2,7 +2,7 @@ package com.packagename.myapp;
 
 import java.io.File;
 
-public class CreateDirectory{
+public class DirectoryInitialization{
   
     public static void main(String[] args){
         
