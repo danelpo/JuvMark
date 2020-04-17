@@ -13,7 +13,7 @@ public class RetriveCreateClassData {
     static String date;
     static String savedname;
     static String csvCurriculumPath;
-    static String csvTaskPath;
+    static String JSONTaskPath;
 
     public static void setClasscode(String passedClasscode) {
         classcode = passedClasscode;
@@ -26,7 +26,7 @@ public class RetriveCreateClassData {
     public static void setSavedname() {
         savedname = classcode.concat("_").concat(date);
         csvCurriculumPath = "Data/Curriculums/" + savedname + "curriculum.csv";
-        csvTaskPath = "Data/Tasks/" + savedname + "tasks.json";
+        JSONtaskpath = "Data/Tasks/" + savedname + "tasks.json";
     }
 
     public static void getCurriculum(String passedCurriculum) {
@@ -53,10 +53,10 @@ public class RetriveCreateClassData {
                     pw.flush();
                     pw.close();
 
-                    System.out.println("Record saved");
+                    System.out.println("Successfully interacted with CSV");
                 } 
                 catch (IOException e) {
-                    System.out.println("Record not saved");
+                    System.out.println("Error with CSV");
                 }
             }
         }
@@ -72,13 +72,13 @@ public class RetriveCreateClassData {
         int numberUnderscores = 0;
         int numberDashes = 0;
         int numberDashesFound = 0;
-        int dashLocation1 = 0;
         int underscoreLocation1 = 0;
         int underscoreLocation2 = 0;
         int arraySize = 0;
 
+        //Creates JSON file for tasks
         try {
-            FileWriter file = new FileWriter(csvTaskPath);
+            FileWriter file = new FileWriter(JSONTaskPath);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -113,21 +113,25 @@ public class RetriveCreateClassData {
                 curriculumNumbersArray = new String[arraySize];
                 int temp = 0;
                 
+                //Sorts curriculum numbers into array
                 for(int j = 0; j < curriculumNumbers.length(); j++){
                     char dashFinder = curriculumNumbers.charAt(j); 
 
+                    //For first curriculum number
                     if(dashFinder == '-' && numberDashesFound == 0){
                         numberDashesFound++;
                         temp = j;
                         curriculumNumbersArray[numberDashesFound-1] = curriculumNumbers.substring(0, j);
                     }
 
+                    //For all curriculum numbers except first and last
                     if(dashFinder == '-' && temp != j){
                         numberDashesFound++;
                         curriculumNumbersArray[numberDashesFound-1] = curriculumNumbers.substring(temp + 1, j);
                         temp = j;
                     }
-
+                    
+                    //For last curriculum number
                     if(j + 1 == curriculumNumbers.length()){
                         numberDashesFound++;
                         curriculumNumbersArray[numberDashesFound-1] = curriculumNumbers.substring(temp + 1, curriculumNumbers.length());
@@ -136,5 +140,4 @@ public class RetriveCreateClassData {
             }
         }
     }
-
 }
