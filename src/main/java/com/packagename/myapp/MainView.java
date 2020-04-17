@@ -11,6 +11,7 @@ public class MainView extends Div {
 
     public MainView() {
         getElement().executeJs("start($0)", getElement());
+        TestingClass.Test();
     }
 
     /*
