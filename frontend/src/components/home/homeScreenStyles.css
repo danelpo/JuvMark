@@ -6,6 +6,19 @@
     font: italic bold 25px ariel,serif;
     border-radius: 10%;
     border: 0.5px solid black;
-    z-index: 1;
+    z-index: 2;
     left: 37.5%;
+}
+
+.mainIframe {
+    border: 1px solid white;
+    position: absolute;
+    width: 50%;
+    height:80%;
+    left:40%;
+    top:10%;
+    background-color: rgba(245, 245, 245, 0);
+    color: rgba(0, 0, 0, 0);
+    border-radius: 2%;
+    z-index: 0;
 }
