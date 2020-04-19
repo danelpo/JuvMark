@@ -4,7 +4,7 @@ import java.io.File;
 
 public class DirectoryInitialization{
   
-    public static void main(String[] args){
+    public static void Setup(){
         
         File DataDir = new File("Data");
         File CurriculumsDir = new File("Data/Curriculums");
@@ -23,8 +23,18 @@ public class DirectoryInitialization{
                 System.out.println("Directory failed to be made");
             }
         }
-        else{
-            System.out.println("Data directory already exists");
+        
+        if(!CurriculumsDir.exists()){
+            CurriculumsDir.mkdir();
+        }
+        
+        if(!TasksDir.exists()){
+            TasksDir.mkdir();
+        }
+        
+        if(!StudentsDir.exists()){
+            System.out.println("hey");
+            StudentsDir.mkdir();
         }
     }
 }
