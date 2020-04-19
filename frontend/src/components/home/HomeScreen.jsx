@@ -10,6 +10,11 @@ export default class HomeScreen extends React.Component {
         super(props);
         this.state = {
             iframeButtonControl: null,
+            createClass_ClassCode: null,
+            createClass_startYear: null,
+            createClass_endYear: null,
+            createClass_semester: null,
+            home: this,
         }
     }
 
@@ -40,6 +45,18 @@ export default class HomeScreen extends React.Component {
         }
         //loads iframe depends on what button was pressed
         this.loadIframe(buttonNumber);
+    }
+
+    changeProps(prop, value) {
+        if(prop === "classCode") {
+            this.setState({createClass_ClassCode: value});
+        } else if(prop === "startYear") {
+            this.setState({createClass_startYear: value});
+        } else if(prop === "endYear") {
+            this.setState({createClass_endYear: value});
+        } else if(prop === "semester") {
+            this.setState({createClass_semester: value});
+        }
     }
 
     getAlpha(string) {
@@ -80,10 +97,17 @@ export default class HomeScreen extends React.Component {
         if(this.state.iframeButtonControl === 0) {
             iframeContent = <CurrentClassIframe />
         } else if (this.state.iframeButtonControl === 1) {
-            iframeContent = <CreateClassIframe />;
+            iframeContent = <CreateClassIframe
+                classCode={this.state.createClass_ClassCode}
+                startYear={this.state.createClass_startYear}
+                endYear={this.state.createClass_endYear}
+                semester={this.state.createClass_semester}
+                changeProps={this.changeProps.bind(this)}
+            />;
         } else if (this.state.iframeButtonControl) {
             iframeContent = <PastClassIframe />;
         }
+        
         return (
             <div>
                 <div className="mainIframe">

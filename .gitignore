@@ -1,3 +1,4 @@
-mvn/
+.mvn/
 target/
-vscode/
+.vscode/
+.settings/
