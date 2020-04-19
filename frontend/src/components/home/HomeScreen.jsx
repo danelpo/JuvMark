@@ -52,6 +52,10 @@ export default class HomeScreen extends React.Component {
             this.setState({createClass_ClassCode: value});
         } else if(prop === "startYear") {
             this.setState({createClass_startYear: value});
+        } else if(prop === "endYear") {
+            this.setState({createClass_endYear: value});
+        } else if(prop === "semester") {
+            this.setState({createClass_semester: value});
         }
     }
 
@@ -89,8 +93,6 @@ export default class HomeScreen extends React.Component {
      }
 
     render() {
-        console.log(this.state);
-
         let iframeContent;
         if(this.state.iframeButtonControl === 0) {
             iframeContent = <CurrentClassIframe />
