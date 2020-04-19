@@ -1,12 +1,12 @@
 import React from 'react';
 import './App.css';
-import {BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
+//import {BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
 import HomeScreen from './components/home/HomeScreen.jsx';
 
 function App() {
   return (
     <div className="App">
-      {/*<p>hello darkness my old buddy</p>
+      {/*<p>hello darkness my old friend</p>
       <Router>
         <nav>
           <ul>

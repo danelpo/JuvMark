@@ -134,8 +134,14 @@ public class CreateClassDataSorting {
                         curriculumNumbersArray[numberDashesFound - 1] = curriculumNumbers.substring(temp + 1,
                                 curriculumNumbers.length());
                     }
+<<<<<<< HEAD
                 }
                 System.out.println(description);
+=======
+                } 
+                //System.out.println(curriculumNumbersArray[]);
+                //System.out.println(description);
+>>>>>>> 17e76137c66fafeb48d7bae1f6d6028ec213eca9
             }
         }
         System.out.println("Here");
