@@ -7,7 +7,11 @@ import java.io.PrintWriter;
 import java.io.Writer;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+
+import org.json.simple.JSONArray;
 
 public class CreateClassDataSorting {
     static String classcode;
@@ -15,8 +19,9 @@ public class CreateClassDataSorting {
     static String savedname;
     static String csvCurriculumPath;
     static String JSONTaskPath;
+    private static FileWriter file;
 
-    static Gson taskJSON = new Gson();
+    Gson taskJSON = new GsonBuilder().setPrettyPrinting().create();
 
     public static void setClasscode(final String passedClasscode) {
         classcode = passedClasscode;
@@ -66,10 +71,11 @@ public class CreateClassDataSorting {
     }
 
     // Accepts passed in tasks
-    public static void getTasks(final String passedTasks) {
+    @SuppressWarnings("unchecked")
+    public static void getTasks(String passedTasks, int number) {
         String tasknumber = "null";
         String curriculumNumbers = "null";
-        String[] curriculumNumbersArray;
+        String[] curriculumNumbersArray = null;
         String description = "null";
         int numberUnderscores = 0;
         int numberDashes = 0;
@@ -136,26 +142,97 @@ public class CreateClassDataSorting {
                 System.out.println(description);
             }
         }
-        System.out.println("Here");
+    
+        if(number == 1){
+            JsonObject taskDetails = new JsonObject();
+            taskDetails.addProperty("Task Number", tasknumber);
+            taskDetails.addProperty("Curriculums", curriculumNumbers);
+            taskDetails.addProperty("Description", description);
 
+            try {
+                FileWriter fw = new FileWriter(JSONTaskPath, true);
+                BufferedWriter bw = new BufferedWriter(fw);
+                PrintWriter pw = new PrintWriter(bw);
+                
+                pw.println("[");
+                pw.println("\t" + taskDetails + ",");
+                pw.flush();
+                pw.close();
+    
+                System.out.println("Successfully interacted with JSON File");
+            } catch (final IOException e) {
+                System.out.println("Error with JSON");
+            }
+            
+        }
+
+        if(number == 0){
+            JsonObject taskDetails = new JsonObject();
+            taskDetails.addProperty("Task Number", tasknumber);
+            taskDetails.addProperty("Curriculums", curriculumNumbers);
+            taskDetails.addProperty("Description", description);
+
+            try {
+                FileWriter fw = new FileWriter(JSONTaskPath, true);
+                BufferedWriter bw = new BufferedWriter(fw);
+                PrintWriter pw = new PrintWriter(bw);
+                
+                pw.println("\t" + taskDetails + ",");
+                pw.flush();
+                pw.close();
+    
+                System.out.println("Successfully interacted with JSON File");
+            } catch (final IOException e) {
+                System.out.println("Error with JSON");
+            }
+            
+        }
+
+        if(number == 2){
+            JsonObject taskDetails = new JsonObject();
+            taskDetails.addProperty("Task Number", tasknumber);
+            taskDetails.addProperty("Curriculums", curriculumNumbers);
+            taskDetails.addProperty("Description", description);
+
+            try {
+                FileWriter fw = new FileWriter(JSONTaskPath, true);
+                BufferedWriter bw = new BufferedWriter(fw);
+                PrintWriter pw = new PrintWriter(bw);
+                
+                pw.println("\t" + taskDetails);
+                pw.println("]");
+                pw.flush();
+                pw.close();
+    
+                System.out.println("Successfully interacted with JSON File");
+            } catch (final IOException e) {
+                System.out.println("Error with JSON");
+            }
+            
+        }
+        /*
         JsonObject taskDetails = new JsonObject();
         taskDetails.addProperty("Task Number", tasknumber);
         taskDetails.addProperty("Curriculums", curriculumNumbers);
         taskDetails.addProperty("Description", description);
 
-        JsonObject taskObject = new JsonObject();
-        taskObject.add(tasknumber, taskDetails);
-
-        JsonObject taskList = new JsonObject();
-        taskList.add("Tasks", taskObject);
+        JsonArray taskList = new JsonArray();
+        taskList.add(taskDetails);
         System.out.println(taskList.toString());
-
+    
         try {
-            Writer writer = new FileWriter(JSONTaskPath);
-            taskJSON.toJson(taskList, writer);
-            writer.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } 
+            FileWriter fw = new FileWriter(JSONTaskPath, true);
+            BufferedWriter bw = new BufferedWriter(fw);
+            PrintWriter pw = new PrintWriter(bw);
+
+            pw.println(taskList);
+            pw.flush();
+            pw.close();
+
+            System.out.println("Successfully interacted with JSON File");
+        } catch (final IOException e) {
+            System.out.println("Error with JSON");
+        }
+        */
     }
 }
