@@ -1,5 +1,6 @@
 import React from 'react';
 import './iframeStyles.css';
+import CreateNewCurriculum from './createClassIframeComponents/CreateNewCurriculum.jsx';
 
 export default class CreateClassIframe extends React.Component {
 
@@ -99,7 +100,7 @@ export default class CreateClassIframe extends React.Component {
 
         let createCurriculumIframe = (
             <div className="iframeContent">
-                <h1>Create Curriculum</h1>
+                <CreateNewCurriculum />
             </div>
         );
 
