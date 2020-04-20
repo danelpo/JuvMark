@@ -142,20 +142,26 @@ public class CreateClassDataSorting {
                 System.out.println(description);
             }
         }
-    
+        
+        //First task pushed
         if(number == 1){
             JsonObject taskDetails = new JsonObject();
             taskDetails.addProperty("Task Number", tasknumber);
-            taskDetails.addProperty("Curriculums", curriculumNumbers);
+            
+            JsonArray curriculumArrayJson = new JsonArray();
+            for (int i = 0; i < arraySize; i++) {
+                curriculumArrayJson.add(curriculumNumbersArray[i]);
+            }
+            taskDetails.add("Curriculums", curriculumArrayJson);
             taskDetails.addProperty("Description", description);
-
+            
             try {
                 FileWriter fw = new FileWriter(JSONTaskPath, true);
                 BufferedWriter bw = new BufferedWriter(fw);
                 PrintWriter pw = new PrintWriter(bw);
                 
-                pw.println("[");
-                pw.println("\t" + taskDetails + ",");
+                pw.println("{\"Tasks\":{");
+                pw.println("\t" + "\"" + tasknumber + "\"" + ":"+ taskDetails + ",");
                 pw.flush();
                 pw.close();
     
@@ -166,10 +172,16 @@ public class CreateClassDataSorting {
             
         }
 
+        //Middle tasks
         if(number == 0){
             JsonObject taskDetails = new JsonObject();
             taskDetails.addProperty("Task Number", tasknumber);
-            taskDetails.addProperty("Curriculums", curriculumNumbers);
+            
+            JsonArray curriculumArrayJson = new JsonArray();
+            for (int i = 0; i < arraySize; i++) {
+                curriculumArrayJson.add(curriculumNumbersArray[i]);
+            }
+            taskDetails.add("Curriculums", curriculumArrayJson);
             taskDetails.addProperty("Description", description);
 
             try {
@@ -177,7 +189,7 @@ public class CreateClassDataSorting {
                 BufferedWriter bw = new BufferedWriter(fw);
                 PrintWriter pw = new PrintWriter(bw);
                 
-                pw.println("\t" + taskDetails + ",");
+                pw.println("\t" + "\"" + tasknumber + "\"" + ":"+ taskDetails + ",");
                 pw.flush();
                 pw.close();
     
@@ -188,10 +200,16 @@ public class CreateClassDataSorting {
             
         }
 
+        //Last Task
         if(number == 2){
             JsonObject taskDetails = new JsonObject();
             taskDetails.addProperty("Task Number", tasknumber);
-            taskDetails.addProperty("Curriculums", curriculumNumbers);
+            
+            JsonArray curriculumArrayJson = new JsonArray();
+            for (int i = 0; i < arraySize; i++) {
+                curriculumArrayJson.add(curriculumNumbersArray[i]);
+            }
+            taskDetails.add("Curriculums", curriculumArrayJson);
             taskDetails.addProperty("Description", description);
 
             try {
@@ -199,8 +217,8 @@ public class CreateClassDataSorting {
                 BufferedWriter bw = new BufferedWriter(fw);
                 PrintWriter pw = new PrintWriter(bw);
                 
-                pw.println("\t" + taskDetails);
-                pw.println("]");
+                pw.println("\t" + "\"" + tasknumber + "\"" + ":"+ taskDetails);
+                pw.println("}}");
                 pw.flush();
                 pw.close();
     
