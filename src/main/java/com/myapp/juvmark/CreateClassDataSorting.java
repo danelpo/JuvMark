@@ -4,14 +4,11 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.Writer;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-
-import org.json.simple.JSONArray;
 
 public class CreateClassDataSorting {
     static String classcode;
@@ -19,7 +16,6 @@ public class CreateClassDataSorting {
     static String savedname;
     static String csvCurriculumPath;
     static String JSONTaskPath;
-    private static FileWriter file;
 
     Gson taskJSON = new GsonBuilder().setPrettyPrinting().create();
 
@@ -225,32 +221,7 @@ public class CreateClassDataSorting {
                 System.out.println("Successfully interacted with JSON File");
             } catch (final IOException e) {
                 System.out.println("Error with JSON");
-            }
-            
+            }   
         }
-        /*
-        JsonObject taskDetails = new JsonObject();
-        taskDetails.addProperty("Task Number", tasknumber);
-        taskDetails.addProperty("Curriculums", curriculumNumbers);
-        taskDetails.addProperty("Description", description);
-
-        JsonArray taskList = new JsonArray();
-        taskList.add(taskDetails);
-        System.out.println(taskList.toString());
-    
-        try {
-            FileWriter fw = new FileWriter(JSONTaskPath, true);
-            BufferedWriter bw = new BufferedWriter(fw);
-            PrintWriter pw = new PrintWriter(bw);
-
-            pw.println(taskList);
-            pw.flush();
-            pw.close();
-
-            System.out.println("Successfully interacted with JSON File");
-        } catch (final IOException e) {
-            System.out.println("Error with JSON");
-        }
-        */
     }
 }
