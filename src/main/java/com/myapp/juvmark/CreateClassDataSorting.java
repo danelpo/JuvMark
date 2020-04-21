@@ -15,25 +15,29 @@ public class CreateClassDataSorting {
     static String date;
     static String savedname;
     static String csvCurriculumPath;
+    static String JSONCurriculumPath;
     static String JSONTaskPath;
 
+    Gson curriculumJSON = new GsonBuilder().setPrettyPrinting().create();
     Gson taskJSON = new GsonBuilder().setPrettyPrinting().create();
 
-    public static void setClasscode(final String passedClasscode) {
+    public static void setClasscode(String passedClasscode) {
         classcode = passedClasscode;
     }
-
-    public static void setDate(final String passedDate) {
+    
+    public static void setDate(String passedDate) {
         date = passedDate;
     }
 
+    //Will create a name for referencing
     public static void setSavedname() {
         savedname = classcode.concat("_").concat(date);
-        csvCurriculumPath = "Data/Curriculums/" + savedname + "curriculum.csv";
+        JSONCurriculumPath = "Data/Curriculums/" + savedname + "curriculum.json";
         JSONTaskPath = "Data/Tasks/" + savedname + "tasks.json";
     }
 
-    public static void getCurriculum(final String passedCurriculum) {
+    //Accepts passed in curriculums
+    public static void getCurriculum(String passedCurriculum, int number) {
         String curriculumNumber;
         String description;
 
@@ -47,27 +51,77 @@ public class CreateClassDataSorting {
                 curriculumNumber = passedCurriculum.substring(0, underscoreLocation);
                 description = passedCurriculum.substring(underscoreLocation + 1);
 
-                // Creates csv file, then writes to it.
-                try {
-                    final FileWriter fw = new FileWriter(csvCurriculumPath, true);
-                    final BufferedWriter bw = new BufferedWriter(fw);
-                    final PrintWriter pw = new PrintWriter(bw);
+                //If first passed curriculum
+                if(number == 1){
+                    JsonObject curriculumDetails = new JsonObject();
+                    curriculumDetails.addProperty("Curriculum Number:", curriculumNumber);
+                    curriculumDetails.addProperty("Description", description);
+                    
+                    try {
+                        FileWriter fw = new FileWriter(JSONCurriculumPath, true);
+                        BufferedWriter bw = new BufferedWriter(fw);
+                        PrintWriter pw = new PrintWriter(bw);
+                        
+                        pw.println("{\"Curriculums\":{");
+                        pw.println("\t" + "\"" + curriculumNumber + "\"" + ":"+ curriculumDetails + ",");
+                        pw.flush();
+                        pw.close();
+            
+                        System.out.println("Successfully interacted with curriculum JSON File");
+                    } catch (final IOException e) {
+                        System.out.println("Error with JSON");
+                    }
+                    
+                }
 
-                    pw.println(curriculumNumber + "," + description + "_curriculum");
-                    pw.flush();
-                    pw.close();
+                //If middle curriculum
+                if(number == 0){
+                    JsonObject curriculumDetails = new JsonObject();
+                    curriculumDetails.addProperty("Curriculum Number:", curriculumNumber);
+                    curriculumDetails.addProperty("Description", description);
+                    
+                    try {
+                        FileWriter fw = new FileWriter(JSONCurriculumPath, true);
+                        BufferedWriter bw = new BufferedWriter(fw);
+                        PrintWriter pw = new PrintWriter(bw);
+                        
+                        pw.println("\t" + "\"" + curriculumNumber + "\"" + ":"+ curriculumDetails + ",");
+                        pw.flush();
+                        pw.close();
+            
+                        System.out.println("Successfully interacted with curriculum JSON File");
+                    } catch (final IOException e) {
+                        System.out.println("Error with JSON");
+                    }
+                    
+                }
 
-                    System.out.println("Successfully interacted with CSV");
-                } catch (final IOException e) {
-                    System.out.println("Error with CSV");
+                //If last passed curriculum
+                if(number == 2){
+                    JsonObject curriculumDetails = new JsonObject();
+                    curriculumDetails.addProperty("Curriculum Number:", curriculumNumber);
+                    curriculumDetails.addProperty("Description", description);
+                    
+                    try {
+                        FileWriter fw = new FileWriter(JSONCurriculumPath, true);
+                        BufferedWriter bw = new BufferedWriter(fw);
+                        PrintWriter pw = new PrintWriter(bw);
+                        
+                        pw.println("\t" + "\"" + curriculumNumber + "\"" + ":"+ curriculumDetails);
+                        pw.println("}}");
+                        pw.flush();
+                        pw.close();
+            
+                        System.out.println("Successfully interacted with curriculum JSON File");
+                    } catch (final IOException e) {
+                        System.out.println("Error with JSON");
+                    }   
                 }
             }
         }
-
     }
 
     // Accepts passed in tasks
-    @SuppressWarnings("unchecked")
     public static void getTasks(String passedTasks, int number) {
         String tasknumber = "null";
         String curriculumNumbers = "null";
@@ -135,7 +189,6 @@ public class CreateClassDataSorting {
                                 curriculumNumbers.length());
                     }
                 }
-                System.out.println(description);
             }
         }
         
@@ -161,9 +214,9 @@ public class CreateClassDataSorting {
                 pw.flush();
                 pw.close();
     
-                System.out.println("Successfully interacted with JSON File");
+                System.out.println("Successfully interacted with task JSON File");
             } catch (final IOException e) {
-                System.out.println("Error with JSON");
+                System.out.println("Error with task JSON");
             }
             
         }
@@ -189,9 +242,9 @@ public class CreateClassDataSorting {
                 pw.flush();
                 pw.close();
     
-                System.out.println("Successfully interacted with JSON File");
+                System.out.println("Successfully interacted with task JSON File");
             } catch (final IOException e) {
-                System.out.println("Error with JSON");
+                System.out.println("Error with task JSON");
             }
             
         }
@@ -218,9 +271,9 @@ public class CreateClassDataSorting {
                 pw.flush();
                 pw.close();
     
-                System.out.println("Successfully interacted with JSON File");
+                System.out.println("Successfully interacted with task JSON File");
             } catch (final IOException e) {
-                System.out.println("Error with JSON");
+                System.out.println("Error with task JSON");
             }   
         }
     }
