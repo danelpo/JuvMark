@@ -3,6 +3,7 @@ package com.myapp.juvmark;
 public class TestingClass {
     
     public static void Test(){
+       
         DirectoryInitialization.Setup();
         CreateClassDataSorting.setClasscode("ICS4U");
         CreateClassDataSorting.setDate("2019-2020_2");
@@ -14,6 +15,5 @@ public class TestingClass {
         CreateClassDataSorting.getTasks("Q1_A2-A3-B1-C1-C3_descrip", 0);
         CreateClassDataSorting.getTasks("Q2_A2-A3-B3_description", 0);
         CreateClassDataSorting.getTasks("T2_B3-B4-C2-D1_des,cription", 2);
-
     }
 }
