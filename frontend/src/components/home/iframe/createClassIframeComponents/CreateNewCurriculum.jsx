@@ -7,6 +7,7 @@ export default class CreateNewCurriculum extends React.Component {
         super(props);
         this.state = {
             returnedData: null,
+            serverMessage: "test FAILED",
         }
     }
 
@@ -39,11 +40,20 @@ export default class CreateNewCurriculum extends React.Component {
         this.doFetchAndBuild('/data/hello');
     }
     */
+
+   componentDidMount() {
+       fetch('http://localhost:8080/data/hello').then(Response => {return Response.text()}).then(Message => {
+           console.log("here is the message:");console.log(Message);this.setState({serverMessage: Message});});
+   }
    
     render() {
+        let serverMessage = this.state.serverMessage;
         return(
             <div className="iframeContent">
                 <h1>Create Curriculum for: {this.props.classCode}</h1>
+                <h4>Message recieved from server: {serverMessage}</h4>
+                <h5>The message above is an example of React reciveing data from server</h5>
+                <h5>"{serverMessage}" has been set in the HelloWorldTest.java file, line 14</h5>
             </div>
         )
     }
