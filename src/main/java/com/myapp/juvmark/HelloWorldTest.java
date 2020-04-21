@@ -1,6 +1,5 @@
 package com.myapp.juvmark;
 
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -10,6 +9,6 @@ public class HelloWorldTest {
 
     @RequestMapping("/hello")
     public String hello() {
-        return "Test successful";
+        return("test successful!");
     }
 }

@@ -47,7 +47,6 @@ export default class CreateClassIframe extends React.Component {
             classCodeInitValue = this.state.classCode;
             this.setState({classCode: null});
         }
-
         let startYearInitValue;
         if(this.state.startYear) {
             startYearInitValue = this.state.startYear;
@@ -65,7 +64,6 @@ export default class CreateClassIframe extends React.Component {
             semesterInitValue = this.state.semester;
             this.setState({semester: null});
         }
-
         let createClassHomeIframe = (
             <div className="iframeContent">
                 <h1>Create Class</h1>
@@ -97,11 +95,8 @@ export default class CreateClassIframe extends React.Component {
                 </div>
             </div>
         );
-
         let createCurriculumIframe = (
-            <div className="iframeContent">
-                <CreateNewCurriculum />
-            </div>
+                <CreateNewCurriculum classCode={this.props.classCode? this.props.classCode : "Class Code Not Given"}/>
         );
 
         let loadOldCurriculumIframe = (
