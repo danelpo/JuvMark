@@ -6,6 +6,7 @@ public class TestingClass {
        
         
         DirectoryInitialization.Setup();
+        GetCurriculum.getCurriculum("ICS4U_2019-2020_2");
         
         /**
         CreateClassDataSorting.setClasscode("ICS4U");

@@ -277,9 +277,4 @@ public class CreateClassDataSorting {
             }   
         }
     }
-    /*
-    public String getCurriculum() {
-
-    }
-    */
 }

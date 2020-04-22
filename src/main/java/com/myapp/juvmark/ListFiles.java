@@ -23,7 +23,7 @@ public class ListFiles {
         
                     if (dotFinder == '.') {
                         int dotLocation = i;
-                        temp = temp.substring(0, dotLocation);
+                        temp = temp.substring(0, dotLocation-10);
                         resultList.add(temp);
                     }
                 }
