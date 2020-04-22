@@ -4,7 +4,11 @@ public class TestingClass {
     
     public static void Test(){
        
+        
         DirectoryInitialization.Setup();
+        ListFiles.listFiles("Data/Curriculums");
+        
+        /**
         CreateClassDataSorting.setClasscode("ICS4U");
         CreateClassDataSorting.setDate("2019-2020_2");
         CreateClassDataSorting.setSavedname();
@@ -15,5 +19,14 @@ public class TestingClass {
         CreateClassDataSorting.setTasks("Q1_A2-A3-B1-C1-C3_descrip", 0);
         CreateClassDataSorting.setTasks("Q2_A2-A3-B3_description", 0);
         CreateClassDataSorting.setTasks("T2_B3-B4-C2-D1_des,cription", 2);
+        
+        CreateClassDataSorting.setClasscode("SCH4U");
+        CreateClassDataSorting.setDate("2019-2020_2");
+        CreateClassDataSorting.setSavedname();
+        CreateClassDataSorting.setCurriculum("A1_1234", 1);
+        CreateClassDataSorting.setCurriculum("C1_9876", 0);
+        CreateClassDataSorting.setCurriculum("C3_987654321", 2);
+        */
+        //CreateClassDataSorting.getCurriculum();
     }
 }
