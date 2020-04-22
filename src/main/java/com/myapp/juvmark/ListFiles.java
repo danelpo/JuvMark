@@ -39,11 +39,11 @@ public class ListFiles {
 
         //Isolate class code
         for (int i = 0; i < classFile.length(); i++) {
-            char underscoreFinder = classFile.charAt(i);
+            char dotFinder1 = classFile.charAt(i);
 
-            if (underscoreFinder == '_') {
-                int underscoreLocation = i;
-                classFile = classFile.substring(0, underscoreLocation);
+            if (dotFinder1 == '.') {
+                int dotLocation1 = i;
+                classFile = classFile.substring(0, dotLocation1);
             }
         }
        
@@ -59,9 +59,9 @@ public class ListFiles {
                    
                     //Removes the .json
                     for (int i = 0; i < temp.length(); i++) {
-                    final char dotFinder = temp.charAt(i);
+                    final char dotFinder2 = temp.charAt(i);
         
-                    if (dotFinder == '.') {
+                    if (dotFinder2 == '.') {
                         int dotLocation = i;
                         temp = temp.substring(0, dotLocation-5);
                         resultList.add(temp);
