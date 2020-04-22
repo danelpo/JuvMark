@@ -7,7 +7,7 @@ To run:
 mvn clean install (if updated)
 mvn spring-boot:run
 
-localhost:8080/home
+localhost:8080
 
 for JUST react:
 
