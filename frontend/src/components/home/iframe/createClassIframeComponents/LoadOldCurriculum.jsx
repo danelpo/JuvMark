@@ -29,8 +29,14 @@ export default class LoadOldCurriculum extends React.Component {
         return optionArray;
     }
 
+    viewCurriculum = () => {
+        fetch('http://localhost:8080/api/data/curriculum/' + this.state.openOption.label).then(Respone => {return Respone.json()}).then(Message => {
+            console.log(Message.Curriculums);
+        });
+    }
+
     render() {
-        let dropMenu, curriculumButtonDiv = null;
+        let dropMenu, curriculumButtonDiv, viewIframe = null;
 
         if(this.state.serverMessage) {
             dropMenu = (<Select className="loadCurriculumDropDownMenu" value={this.state.openOption} onChange={this.handleChange} options={this.options()}/>);
@@ -38,10 +44,12 @@ export default class LoadOldCurriculum extends React.Component {
             if(this.state.openOption) {
                 curriculumButtonDiv = (<div className="textBoxDiv">
                     <button className="textBox oldCurriculumSelectOptionButton" id="oldCurriculumSaveOption">Save</button>
-                    <button className="textBox oldCurriculumSelectOptionButton" id="oldCurriculumViewOption">View</button>
+                    <button className="textBox oldCurriculumSelectOptionButton" id="oldCurriculumViewOption" onClick={this.viewCurriculum}>View</button>
                 </div>);
             }
         }
+
+        
         return(
             <div className="iframeContent">
                 <h1>Load Curriculum for: {this.props.classCode}</h1>
@@ -49,6 +57,7 @@ export default class LoadOldCurriculum extends React.Component {
                     {dropMenu}
                 </div>
                 {curriculumButtonDiv}
+                {viewIframe}
             </div>
         )
     }
