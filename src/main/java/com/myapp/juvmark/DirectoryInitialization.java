@@ -10,9 +10,6 @@ public class DirectoryInitialization{
         File CurriculumsDir = new File("Data/Curriculums");
         File TasksDir = new File("Data/Tasks");
         File StudentsDir = new File("Data/Students");
-        File OtherDir = new File("Data/Other");
-        File Curriculums = new File("Data/Other/Curriculums");
-        File Tasks = new File("Data/Other/Tasks");
         
         //If no directory exists, make one
         if(!DataDir.exists()){
@@ -40,18 +37,6 @@ public class DirectoryInitialization{
         
         if(!StudentsDir.exists()){
             StudentsDir.mkdir();
-        }
-
-        if(!OtherDir.exists()){
-            OtherDir.mkdir();
-        }
-
-        if(!Curriculums.exists()){
-            Curriculums.mkdir();
-        }
-
-        if(!Tasks.exists()){
-            Tasks.mkdir();
         }
     }
 }

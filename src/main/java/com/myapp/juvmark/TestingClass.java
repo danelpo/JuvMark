@@ -6,7 +6,6 @@ public class TestingClass {
        
         
         DirectoryInitialization.Setup();
-        ListFiles.listFiles("Data/Curriculums");
         
         /**
         CreateClassDataSorting.setClasscode("ICS4U");

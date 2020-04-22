@@ -1,6 +1,5 @@
 package com.myapp.juvmark;
 
-import java.io.File;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
