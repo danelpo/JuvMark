@@ -1,6 +1,7 @@
 import React from 'react';
 import './iframeStyles.css';
 import CreateNewCurriculum from './createClassIframeComponents/CreateNewCurriculum.jsx';
+import LoadOldCurriculum from './createClassIframeComponents/LoadOldCurriculum.jsx';
 
 export default class CreateClassIframe extends React.Component {
 
@@ -101,7 +102,7 @@ export default class CreateClassIframe extends React.Component {
 
         let loadOldCurriculumIframe = (
             <div className="iframeContent">
-                <h1>Load Old Curriculum</h1>
+                <LoadOldCurriculum classCode={this.props.classCode? this.props.classCode : "Class Code Not Given"}/>
             </div>
         );
 

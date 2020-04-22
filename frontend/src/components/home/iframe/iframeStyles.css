@@ -23,7 +23,7 @@
     border-radius: 5%;
     border: 1px solid gray;
     background-color: white;
-    font: bold 100% ariel,serif;
+    font: bold 2vmin ariel,serif;
 }
 
 #classCodeBox {
@@ -54,5 +54,24 @@
 }
 
 #OldCurriculumButton {
+    left: 3%;
+}
+
+.loadCurriculumDropDownMenu {
+    text-align: center;
+    font-size: 3vmin;
+}
+
+.oldCurriculumSelectOptionButton {
+    width:35%;
+    position: relative;
+    top:100%;
+}
+
+#oldCurriculumSaveOption {
+    left: -3%;
+}
+
+#oldCurriculumViewOption {
     left: 3%;
 }

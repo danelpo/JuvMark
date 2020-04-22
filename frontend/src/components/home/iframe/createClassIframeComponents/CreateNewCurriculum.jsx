@@ -7,7 +7,7 @@ export default class CreateNewCurriculum extends React.Component {
         super(props);
         this.state = {
             returnedData: null,
-            serverMessage: "test FAILED",
+            serverMessage: null,
         }
     }
 

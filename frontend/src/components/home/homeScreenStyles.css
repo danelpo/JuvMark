@@ -3,7 +3,7 @@
     position: absolute;
     width: 25%;
     height: 10%;
-    font: italic bold 25px ariel,serif;
+    font: italic bold 4vmin ariel,serif;
     border-radius: 10%;
     border: 0.5px solid black;
     z-index: 2;
