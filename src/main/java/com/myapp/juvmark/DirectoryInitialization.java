@@ -17,9 +17,6 @@ public class DirectoryInitialization{
                 CurriculumsDir.mkdir();
                 TasksDir.mkdir();
                 StudentsDir.mkdir();
-                OtherDir.mkdir();
-                Curriculums.mkdir();
-                Tasks.mkdir();
                 System.out.println("All directories successfully made");    
             }
             else{
