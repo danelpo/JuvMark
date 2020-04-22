@@ -6,7 +6,7 @@ import java.util.List;
 
 public class ListFiles {
    
-    public static List<String> listFiles(String directoryName){
+    public static List<String> listCurriculum(String directoryName){
         File directory = new File(directoryName);
         List<String> resultList = new ArrayList<String>();
 
@@ -31,6 +31,46 @@ public class ListFiles {
         }
         System.out.println(resultList);
         return resultList;
-    }
+    }       
 
+    public static List<String> listTasks(String classFile){
+        File directory = new File("Data/Tasks/");
+        List<String> resultList = new ArrayList<String>();
+
+        //Isolate class code
+        for (int i = 0; i < classFile.length(); i++) {
+            char underscoreFinder = classFile.charAt(i);
+
+            if (underscoreFinder == '_') {
+                int underscoreLocation = i;
+                classFile = classFile.substring(0, underscoreLocation);
+            }
+        }
+       
+        //Get all the files from a directory
+        File[] fList = directory.listFiles();
+        for (File file : fList){
+            if (file.isFile()){
+                //System.out.println(file.getName());
+                String temp = file.getName();
+                
+                //Check for files containing the passed in class
+                if(temp.contains(classFile)){
+                   
+                    //Removes the .json
+                    for (int i = 0; i < temp.length(); i++) {
+                    final char dotFinder = temp.charAt(i);
+        
+                    if (dotFinder == '.') {
+                        int dotLocation = i;
+                        temp = temp.substring(0, dotLocation-5);
+                        resultList.add(temp);
+                    }
+                }
+            }
+            }
+        }
+        System.out.println(resultList);
+        return resultList;
+    }       
 }

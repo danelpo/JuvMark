@@ -5,10 +5,20 @@ public class TestingClass {
     public static void Test(){
        
         
-        DirectoryInitialization.Setup();
-        GetCurriculum.getCurriculum("ICS4U_2019-2020_2");
+
+        //DirectoryInitialization.Setup();
+        //GetCurriculum.getCurriculum("ICS4U_2019-2020_2");
+        ListFiles.listTasks("ICS4U_2019-2020_2");
         
-        /**
+        /*
+        CreateClassDataSorting.setClasscode("SCH4U");
+        CreateClassDataSorting.setDate("2018-2019_1");
+        CreateClassDataSorting.setSavedname();
+        CreateClassDataSorting.setTasks("T1_A1-B1-C1_des crisp", 1);
+        CreateClassDataSorting.setTasks("Q1_A2-A3-B1-C1-C3_descrip", 0);
+        CreateClassDataSorting.setTasks("T2_B3-B4-C2-D1_des,cription", 2);
+        */
+        /*
         CreateClassDataSorting.setClasscode("ICS4U");
         CreateClassDataSorting.setDate("2019-2020_2");
         CreateClassDataSorting.setSavedname();
