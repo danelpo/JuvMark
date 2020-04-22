@@ -43,11 +43,12 @@ export default class CreateNewCurriculum extends React.Component {
 
    componentDidMount() {
        fetch('http://localhost:8080/data/hello').then(Response => {return Response.text()}).then(Message => {
-           console.log("here is the message:");console.log(Message);this.setState({serverMessage: Message});});
+           console.log(Message);this.setState({serverMessage: Message});});
    }
    
     render() {
         let serverMessage = this.state.serverMessage;
+        console.log(serverMessage);
         return(
             <div className="iframeContent">
                 <h1>Create Curriculum for: {this.props.classCode}</h1>
