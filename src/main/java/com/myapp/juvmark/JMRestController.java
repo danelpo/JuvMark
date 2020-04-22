@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,5 +16,11 @@ public class JMRestController {
     @CrossOrigin(origins = "http://localhost:3000")
     public List<String> allCurriculums() {
         return(ListFiles.listFiles("Data/Curriculums"));
+    }
+
+    @GetMapping("/curriculum/{id}")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public String getCurriculum(@PathVariable("id") String id){
+        return(GetCurriculum.getCurriculum(id));
     }
 }
