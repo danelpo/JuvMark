@@ -37,7 +37,7 @@ public class CreateClassDataSorting {
     }
 
     //Accepts passed in curriculums
-    public static void getCurriculum(String passedCurriculum, int number) {
+    public static void setCurriculum(String passedCurriculum, int number) {
         String curriculumNumber;
         String description;
 
@@ -122,7 +122,7 @@ public class CreateClassDataSorting {
     }
 
     // Accepts passed in tasks
-    public static void getTasks(String passedTasks, int number) {
+    public static void setTasks(String passedTasks, int number) {
         String tasknumber = "null";
         String curriculumNumbers = "null";
         String[] curriculumNumbersArray = null;
@@ -276,5 +276,8 @@ public class CreateClassDataSorting {
                 System.out.println("Error with task JSON");
             }   
         }
+    }
+    public String getCurriculum() {
+
     }
 }
