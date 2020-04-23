@@ -26,6 +26,13 @@ public class JMRestController {
         return(GetCurriculumAndTasks.getCurriculum(id));
     }
 
+    @GetMapping("/curriculum/{id}/numbers")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public List<String> getCurriculumNumbers(@PathVariable("id") String id){
+        return (GetCurriculumAndTasks.getCurriculumNumbers(id));
+    }
+
+
     @GetMapping("/curriculum/{id}/tasks")
     @CrossOrigin(origins = "http://localhost:3000")
     public List<String> getTasks(@PathVariable("id") String id){
