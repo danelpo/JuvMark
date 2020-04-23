@@ -23,12 +23,18 @@ public class JMRestController {
     @GetMapping("/curriculum/{id}")
     @CrossOrigin(origins = "http://localhost:3000")
     public String getCurriculum(@PathVariable("id") String id){
-        return(GetCurriculum.getCurriculum(id));
+        return(GetCurriculumAndTasks.getCurriculum(id));
     }
 
     @GetMapping("/curriculum/{id}/tasks")
     @CrossOrigin(origins = "http://localhost:3000")
-    public List<String> getTask(@PathVariable("id") String id){
+    public List<String> getTasks(@PathVariable("id") String id){
         return ListFiles.listTasks(id);
+    }
+
+    @GetMapping("/curriculum/{id}/tasks/{taskId}")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public String getTask(@PathVariable("id") String id, @PathVariable String taskId){
+        return (GetCurriculumAndTasks.getTask(id, taskId));
     }
 }
