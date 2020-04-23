@@ -75,3 +75,16 @@
 #oldCurriculumViewOption {
     left: 3%;
 }
+
+#viewOldCurriculumIframe {
+    border: 0px solid black;
+    border-radius: 2%;
+    width: 90%;
+    left: 5%;
+    position: absolute;
+    overflow: auto;
+}
+
+.rdg-row rdg-row-odd {
+    height: auto;
+}

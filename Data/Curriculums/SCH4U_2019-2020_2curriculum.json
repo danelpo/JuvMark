@@ -1,5 +1,5 @@
 {"Curriculums":{
-	"A1":{"Curriculum Number:":"A1","Description":"1234"},
-	"C1":{"Curriculum Number:":"C1","Description":"9876"},
-	"C3":{"Curriculum Number:":"C3","Description":"987654321"}
+	"A1":{"CurriculumNumber":"A1","Description":"1234"},
+	"C1":{"CurriculumNumber":"C1","Description":"9876"},
+	"C3":{"CurriculumNumber":"C3","Description":"987654321"}
 }}

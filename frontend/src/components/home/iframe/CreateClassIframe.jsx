@@ -105,14 +105,12 @@ export default class CreateClassIframe extends React.Component {
                 <LoadOldCurriculum classCode={this.props.classCode? this.props.classCode : "Class Code Not Given"}/>
             </div>
         );
-
         let iframeCurrentWindow = createClassHomeIframe;
         if(this.state.iframeWindow === 1)
             iframeCurrentWindow = createCurriculumIframe;
         else if(this.state.iframeWindow === 2)
-            iframeCurrentWindow = loadOldCurriculumIframe
-        
-            return(
+            iframeCurrentWindow = loadOldCurriculumIframe;
+        return(
             iframeCurrentWindow 
         )
     }

@@ -3,6 +3,7 @@ import './homeScreenStyles.css';
 import CreateClassIframe from './iframe/CreateClassIframe.jsx';
 import CurrentClassIframe from './iframe/CurrentClassIframe.jsx';
 import PastClassIframe from './iframe/PastClassIframe.jsx';
+import Button from '@material-ui/core/Button';
 
 export default class HomeScreen extends React.Component {
 
@@ -104,7 +105,7 @@ export default class HomeScreen extends React.Component {
                 semester={this.state.createClass_semester}
                 changeProps={this.changeProps.bind(this)}
             />;
-        } else if (this.state.iframeButtonControl) {
+        } else if (this.state.iframeButtonControl === 2) {
             iframeContent = <PastClassIframe />;
         }
         
