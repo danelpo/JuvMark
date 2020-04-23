@@ -7,7 +7,8 @@ public class TestingClass {
         
 
         //DirectoryInitialization.Setup();
-        //GetCurriculum.getCurriculum("ICS4U_2019-2020_2");
+       // GetCurriculumAndTasks.getCurriculum("ICS4U_2019-2020_2");
+        GetCurriculumAndTasks.getCurriculumNumbers("ICS4U_2019-2020_2");
         ListFiles.listTasks("ICS4U_2019-2020_2");
         
         /*
