@@ -54,7 +54,7 @@ public class CreateClassDataSorting {
                 //If first passed curriculum
                 if(number == 1){
                     JsonObject curriculumDetails = new JsonObject();
-                    curriculumDetails.addProperty("Curriculum Number:", curriculumNumber);
+                    curriculumDetails.addProperty("CurriculumNumber:", curriculumNumber);
                     curriculumDetails.addProperty("Description", description);
                     
                     try {
@@ -77,7 +77,7 @@ public class CreateClassDataSorting {
                 //If middle curriculum
                 if(number == 0){
                     JsonObject curriculumDetails = new JsonObject();
-                    curriculumDetails.addProperty("Curriculum Number:", curriculumNumber);
+                    curriculumDetails.addProperty("CurriculumNumber:", curriculumNumber);
                     curriculumDetails.addProperty("Description", description);
                     
                     try {
@@ -99,7 +99,7 @@ public class CreateClassDataSorting {
                 //If last passed curriculum
                 if(number == 2){
                     JsonObject curriculumDetails = new JsonObject();
-                    curriculumDetails.addProperty("Curriculum Number:", curriculumNumber);
+                    curriculumDetails.addProperty("CurriculumNumber:", curriculumNumber);
                     curriculumDetails.addProperty("Description", description);
                     
                     try {
