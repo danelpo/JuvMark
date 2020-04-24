@@ -1,7 +1,7 @@
 import React from 'react';
-import './iframeStyles.css';
-import CreateNewCurriculum from './createClassIframeComponents/CreateNewCurriculum.jsx';
-import LoadOldCurriculum from './createClassIframeComponents/LoadOldCurriculum.jsx';
+import '../iframeStyles.css';
+import CreateNewCurriculum from './CreateNewCurriculum.jsx';
+import LoadOldCurriculum from './LoadOldCurriculum.jsx';
 
 export default class CreateClassIframe extends React.Component {
 

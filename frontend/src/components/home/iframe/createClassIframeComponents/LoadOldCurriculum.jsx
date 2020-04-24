@@ -65,7 +65,7 @@ export default class LoadOldCurriculum extends React.Component {
             if(this.state.curriculumExpectations) {
                 let curriculum = []
                 for(var i in this.state.curriculumExpectations)
-                    curriculum.push([i, this.state.curriculumExpectations [i]]);
+                    curriculum.push([i, this.state.curriculumExpectations[i]]);
                 curriculum.map(cur => (rows.push({expectation: cur[1].CurriculumNumber, description: cur[1].Description})));
             }
             viewIframe = (
@@ -88,7 +88,7 @@ export default class LoadOldCurriculum extends React.Component {
 
         if(this.state.taskWindow)
         projectedScreen = (
-            <TaskListOptionScreen/>
+            <TaskListOptionScreen loadOld={true}/>
         );
 
         return projectedScreen;

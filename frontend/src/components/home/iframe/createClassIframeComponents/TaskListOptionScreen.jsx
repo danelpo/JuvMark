@@ -1,9 +1,12 @@
 import React from 'react';
 
-export default class TaskListOptionScreen extends React.Component {
+export default class TaskListOptionScreen extends React.Component {//props loadOld
     render() {
         return(
-            <h1>In here</h1>
+            <div className="taskListMainScreen">
+                <h2>Please select an option for your tasks</h2>
+                <h4>Tasks include all tests, quizzes, asignments and evaluations</h4>
+            </div>
         )
     }
 }

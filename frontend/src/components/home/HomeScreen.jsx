@@ -1,9 +1,9 @@
 import React from 'react';
 import './homeScreenStyles.css';
-import CreateClassIframe from './iframe/CreateClassIframe.jsx';
-import CurrentClassIframe from './iframe/CurrentClassIframe.jsx';
-import PastClassIframe from './iframe/PastClassIframe.jsx';
-import Button from '@material-ui/core/Button';
+import CreateClassIframe from './iframe/createClassIframeComponents/CreateClassIframe.jsx';
+import CurrentClassIframe from './iframe/currentClassIframeComponents/CurrentClassIframe.jsx';
+import PastClassIframe from './iframe/pastClassIframeComponents/PastClassIframe.jsx';
+//import Button from '@material-ui/core/Button';
 
 export default class HomeScreen extends React.Component {
 
