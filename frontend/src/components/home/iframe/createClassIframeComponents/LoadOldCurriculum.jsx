@@ -88,7 +88,7 @@ export default class LoadOldCurriculum extends React.Component {
 
         if(this.state.taskWindow)
         projectedScreen = (
-            <TaskListOptionScreen loadOld={true}/>
+            <TaskListOptionScreen loadOld={true} currentCurriculum={this.state.openOption.label}/>
         );
 
         return projectedScreen;

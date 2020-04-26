@@ -3,7 +3,7 @@
     position: absolute;
     width: 25%;
     height: 10%;
-    font: italic bold 4vmin ariel,serif;
+    font: italic 4vmin ariel,serif;
     border-radius: 10%;
     border: 0.5px solid black;
     z-index: 2;
@@ -21,4 +21,12 @@
     color: rgba(0, 0, 0, 0);
     border-radius: 2%;
     z-index: 0;
+}
+
+.boldButton {
+    font-weight: bolder;
+}
+
+.unboldenButton {
+    font-weight: normal;
 }

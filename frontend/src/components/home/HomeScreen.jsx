@@ -94,6 +94,9 @@ export default class HomeScreen extends React.Component {
      }
 
     render() {
+        let button0State = this.state.iframeButtonControl === 0? "homeButton boldButton" : "homeButton unboldenButton";
+        let button1State = this.state.iframeButtonControl === 1? "homeButton boldButton" : "homeButton unboldenButton";
+        let button2State = this.state.iframeButtonControl === 2? "homeButton boldButton" : "homeButton unboldenButton";
         let iframeContent;
         if(this.state.iframeButtonControl === 0) {
             iframeContent = <CurrentClassIframe />
@@ -114,13 +117,13 @@ export default class HomeScreen extends React.Component {
                 <div className="mainIframe">
                     {iframeContent}
                 </div>
-                <input type="button" className="homeButton" value="Current Classes"
+                <input type="button" className={button0State} value="Current Classes"
                 style={{top: ((window.innerHeight / 4) - (window.innerHeight / 20)).toString() + "px"}}
                 onClick={() => this.buttonClicked(0)}/>
-                <input type="button" className="homeButton" value="Create Class"
+                <input type="button" className={button1State} value="Create Class"
                 style={{top: ((window.innerHeight / 2) - (window.innerHeight / 20)).toString() + "px"}}
                 onClick={() => this.buttonClicked(1)}/>
-                <input type="button" className="homeButton" value="Past Classes"
+                <input type="button" className={button2State} value="Past Classes"
                 style={{top: ((window.innerHeight * 3/ 4) - (window.innerHeight / 20)).toString() + "px"}}
                 onClick={() => this.buttonClicked(2)}/>
             </div>
