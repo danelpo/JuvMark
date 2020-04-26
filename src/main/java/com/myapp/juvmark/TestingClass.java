@@ -8,8 +8,8 @@ public class TestingClass {
 
         //DirectoryInitialization.Setup();
        // GetCurriculumAndTasks.getCurriculum("ICS4U_2019-2020_2");
-        GetCurriculumAndTasks.getCurriculumNumbers("ICS4U_2019-2020_2");
-        ListFiles.listTasks("ICS4U_2019-2020_2");
+        GetCurriculumAndTasks.getCurriculumNumberAndDescription("ICS4U_2019-2020_2");
+       // ListFiles.listTasks("ICS4U_2019-2020_2");
         
         /*
         CreateClassDataSorting.setClasscode("SCH4U");
