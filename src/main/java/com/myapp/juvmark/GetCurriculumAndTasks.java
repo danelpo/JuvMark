@@ -1,6 +1,5 @@
 package com.myapp.juvmark;
 
-import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
@@ -65,7 +64,7 @@ public class GetCurriculumAndTasks {
                     if(temp == 'u'){
                        
                         if(counter != 0){
-                            int location = i+22;
+                            int location = i+20;
                             System.out.println(location);
                             
                             for (int j = location; j < location + 15; j++) {
