@@ -195,7 +195,7 @@ public class CreateClassDataSorting {
         //First task pushed
         if(number == 1){
             JsonObject taskDetails = new JsonObject();
-            taskDetails.addProperty("Task Number", tasknumber);
+            taskDetails.addProperty("TaskNumber", tasknumber);
             
             JsonArray curriculumArrayJson = new JsonArray();
             for (int i = 0; i < arraySize; i++) {
@@ -224,7 +224,7 @@ public class CreateClassDataSorting {
         //Middle tasks
         if(number == 0){
             JsonObject taskDetails = new JsonObject();
-            taskDetails.addProperty("Task Number", tasknumber);
+            taskDetails.addProperty("TaskNumber", tasknumber);
             
             JsonArray curriculumArrayJson = new JsonArray();
             for (int i = 0; i < arraySize; i++) {
@@ -252,7 +252,7 @@ public class CreateClassDataSorting {
         //Last Task
         if(number == 2){
             JsonObject taskDetails = new JsonObject();
-            taskDetails.addProperty("Task Number", tasknumber);
+            taskDetails.addProperty("TaskNumber", tasknumber);
             
             JsonArray curriculumArrayJson = new JsonArray();
             for (int i = 0; i < arraySize; i++) {

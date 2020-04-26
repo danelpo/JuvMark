@@ -85,6 +85,19 @@
     overflow: auto;
 }
 
-.rdg-row rdg-row-odd {
-    height: auto;
+.taskOptionButton {
+    position: relative;
+    width: 35%;
+    height: 5vh;
+    font: 3vmin ariel,serif;
+    border-radius: 5%;
+    border: 1px solid black;
+    background-color: white;
+}
+
+#selectOldTaskButton {
+    left: -3%;
+}
+#createNewTaskButton {
+    left: 3%;
 }
