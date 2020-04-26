@@ -15,6 +15,8 @@ export default class HomeScreen extends React.Component {
             createClass_startYear: null,
             createClass_endYear: null,
             createClass_semester: null,
+            createClass_curriculum: null,
+            createClass_taskList: null,
             home: this,
         }
     }

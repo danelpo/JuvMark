@@ -98,6 +98,23 @@
 #selectOldTaskButton {
     left: -3%;
 }
+
 #createNewTaskButton {
+    left: 3%;
+}
+
+#saveTaskButton {
+    left: -3%;
+}
+
+#cancelTaskButton {
+    left: 3%;
+}
+
+#saveClassSettings {
+    left: -3%;
+}
+
+#cancelClassSettings {
     left: 3%;
 }

@@ -16,7 +16,7 @@ export default class TaskListOptionScreen extends React.Component {
             curriculumTaskList: [],
             openOption: null,
             curriculumTaskListTasks: null,
-            selectOldTaskList: false,
+            selectOldTaskListState: false,
         }
     }
 
@@ -27,8 +27,8 @@ export default class TaskListOptionScreen extends React.Component {
             this.setState({curriculumTaskList: message})});
     }
 
-    selectOldTaskList() {
-        this.setState({selectOldTaskList: true});
+    selectOldTaskListFunction() {
+        this.setState({selectOldTaskListState: true});
     }
 
     handleChange = selectedOption => {
@@ -48,12 +48,14 @@ export default class TaskListOptionScreen extends React.Component {
         let myRows = [];
         if(this.state.curriculumTaskListTasks) {
             let myRawRows = [];
-            for(var i in this.state.curriculumTaskListTasks)
-                myRawRows.push([i, this.state.curriculumTaskListTasks[i]]);;
+            for(let i in this.state.curriculumTaskListTasks) {
+                myRawRows.push([i, this.state.curriculumTaskListTasks[i]]);
+            }
             let myLessRawButStillRawRows = myRawRows[0][1];
             let myLessRawRows = [];
-            for(var i in myLessRawButStillRawRows)
+            for(let i in myLessRawButStillRawRows) {
                 myLessRawRows.push(myLessRawButStillRawRows[i]);
+            }
             myLessRawRows.map(task => (myRows.push({taskNumber: task.TaskNumber, expectations: this.arrayToString(task.Curriculums), taskDesc: task.Description})))
         }
         return myRows;
@@ -67,27 +69,48 @@ export default class TaskListOptionScreen extends React.Component {
                 myString = myString + ", "; 
             }
         }
-        console.log(myString);
         return myString;
     }
 
+    cancelTaskView = () => {
+        this.setState({openOption: null});
+    }
+
+    bringToConfirmHomeScreen = () => {
+        let newJsonObject = this.props.classDetails;
+        newJsonObject.taskList = this.state.openOption.label;
+        this.props.changeToConfirm(newJsonObject);
+    }
+
     render() {
-        let optionMenu, taskTable = null;
-        if(this.state.selectOldTaskList) {
+        let optionMenu, taskTable, optionButtons = null;
+        if(this.state.selectOldTaskListState) {
             optionMenu = (
                 <Select className="loadCurriculumDropDownMenu" value={this.state.openOption} onChange={this.handleChange} options={this.options()}/>
             );
             
             if(this.state.openOption) {
                 const columns = [{key: 'taskNumber', name: 'Task Number'},{key: 'expectations', name: 'Expectations in Curriculum'},{key: 'taskDesc', name: 'Task Description'}];
-                //let rows = [{taskNumber: "T1", taskDesc: "Task Description"}];
                 let rows = this.getRowsForTask();
                 taskTable = (
                     <div className="selectOldTasksDiv">
                         <DataGrid columns={columns} rows={rows}/>
                     </div>
                 );
-                }
+
+                optionButtons = (
+                    <div className="taskOptionsButtonDiv">
+                            <button className="taskOptionButton" id="saveTaskButton" onClick={() => {this.bringToConfirmHomeScreen(this)}}>Save</button>
+                            <button className="taskOptionButton" id="cancelTaskButton" onClick={() => {this.cancelTaskView(this)}}>Cancel</button>
+                    </div>
+                );
+
+                document.getElementById("selectOldTaskButton").disabled = true;
+                document.getElementById("createNewTaskButton").disabled = true;
+            } else {
+                document.getElementById("selectOldTaskButton").disabled = false;
+                document.getElementById("createNewTaskButton").disabled = false;
+            }
         }
         return(
             <div className="taskListMainScreen">
@@ -95,13 +118,15 @@ export default class TaskListOptionScreen extends React.Component {
                         <h4>Tasks include all tests, quizzes, asignments and evaluations</h4>
                         <br/>
                         <div className="taskOptionsButtonDiv">
-                            <button className="taskOptionButton" id="selectOldTaskButton" onClick={() => {this.selectOldTaskList(this)}}>Select Old Task List</button>
+                            <button className="taskOptionButton" id="selectOldTaskButton" onClick={() => {this.selectOldTaskListFunction(this)}}>Select Old Task List</button>
                             <button className="taskOptionButton" id="createNewTaskButton">Create New Task List</button>
                         </div>
                         <br/>
                         {optionMenu}
                         <br/>
                         {taskTable}
+                        <br/>
+                        {optionButtons}
                     </div>
         )
     }
