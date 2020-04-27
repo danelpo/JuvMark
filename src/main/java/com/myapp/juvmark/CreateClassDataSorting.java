@@ -13,6 +13,7 @@ import com.google.gson.JsonObject;
 public class CreateClassDataSorting {
     static String classcode;
     static String date;
+    static String index;
     static String savedname;
     static String csvCurriculumPath;
     static String JSONCurriculumPath;
@@ -21,6 +22,7 @@ public class CreateClassDataSorting {
     Gson curriculumJSON = new GsonBuilder().setPrettyPrinting().create();
     Gson taskJSON = new GsonBuilder().setPrettyPrinting().create();
 
+    /*
     public static void setClasscode(String passedClasscode) {
         classcode = passedClasscode;
     }
@@ -29,9 +31,13 @@ public class CreateClassDataSorting {
         date = passedDate;
     }
 
+    public static void setIndex(String passedIndex) {
+        index = passedIndex;
+    }
+    */
     //Will create a name for referencing
-    public static void setSavedname() {
-        savedname = classcode.concat("_").concat(date);
+    public static void setSavedname(String sentName) {
+        savedname = sentName;
         JSONCurriculumPath = "Data/Curriculums/" + savedname + "curriculum.json";
         JSONTaskPath = "Data/Tasks/" + savedname + "tasks.json";
     }

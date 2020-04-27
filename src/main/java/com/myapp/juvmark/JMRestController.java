@@ -38,6 +38,12 @@ public class JMRestController {
         return (GetCurriculumAndTasks.getCurriculumNumberAndDescription(id));
     }
 
+    @GetMapping("/curriculum/{id}/{curId}")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public List<String> getAllCurriculum(@PathVariable("id") String id, @PathVariable("curId") String curId){
+        return (GetCurriculumAndTasks.getSpecificCurriculumNumberAndDescription(id, curId));
+    }
+
 
     @GetMapping("/curriculum/{id}/tasks")
     @CrossOrigin(origins = "http://localhost:3000")
@@ -45,9 +51,15 @@ public class JMRestController {
         return ListFiles.listTasks(id);
     }
 
-    @GetMapping("/curriculum/{id}/tasks/{taskId}")
+    @GetMapping("/curriculum/{id}/tasks/{taskName}")
     @CrossOrigin(origins = "http://localhost:3000")
-    public String getTask(@PathVariable("id") String id, @PathVariable String taskId){
-        return (GetCurriculumAndTasks.getTask(id, taskId));
+    public String getTask(@PathVariable("id") String id, @PathVariable("taskName") String taskName){
+        return (GetCurriculumAndTasks.getTask(id, taskName));
+    }
+
+    @GetMapping("/curriculum/{id}/tasks/{taskName}/{taskId}")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public String getSpecificTask(@PathVariable("id") String id, @PathVariable("taskName") String taskName, @PathVariable("taskId") String taskId){
+        return (GetCurriculumAndTasks.getSpecificTask(id, taskName, taskId));
     }
 }
