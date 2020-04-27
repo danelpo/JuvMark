@@ -14,6 +14,7 @@ export default class LoadOldCurriculum extends React.Component {
             viewMode:false,
             curriculumExpectations: null,
             taskWindow: false,
+            classDetails: props.classDetails,
         }
     }
 
@@ -41,7 +42,9 @@ export default class LoadOldCurriculum extends React.Component {
     }
 
     saveCurriculum = () => {
-        this.setState({taskWindow:true});
+        let newJsonObject = this.state.classDetails;
+        newJsonObject.curriculum = this.state.openOption.label;
+        this.setState({taskWindow:true, classDetails: newJsonObject});
     }
 
     render() {
@@ -86,10 +89,12 @@ export default class LoadOldCurriculum extends React.Component {
             </div>
         );
 
-        if(this.state.taskWindow)
-        projectedScreen = (
-            <TaskListOptionScreen loadOld={true} currentCurriculum={this.state.openOption.label}/>
-        );
+        if(this.state.taskWindow) {
+            projectedScreen = (
+                <TaskListOptionScreen loadOld={true} currentCurriculum={this.state.openOption.label}
+                changeToConfirm={this.props.changeToConfirm} classDetails={this.state.classDetails}/>
+            );
+        }
 
         return projectedScreen;
     }

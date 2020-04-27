@@ -13,6 +13,8 @@ export default class CreateClassIframe extends React.Component {
             endYear: props.endYear,
             semester: props.semester,
             iframeWindow: 0,
+            confirmScreen: false,
+            classDetails: null,
         }
     }
 
@@ -43,28 +45,56 @@ export default class CreateClassIframe extends React.Component {
     }
 
     render() {
-        let classCodeInitValue;
+        let classCodeInitValue, startYearInitValue, endYearInitValue, semesterInitValue = null;
+
         if(this.state.classCode) {
             classCodeInitValue = this.state.classCode;
             this.setState({classCode: null});
         }
-        let startYearInitValue;
+        
         if(this.state.startYear) {
             startYearInitValue = this.state.startYear;
             this.setState({startYear: null});
         }
 
-        let endYearInitValue;
         if(this.state.endYear) {
             endYearInitValue = this.state.endYear;
             this.setState({endYear: null});
         }
 
-        let semesterInitValue;
         if(this.state.semester) {
             semesterInitValue = this.state.semester;
             this.setState({semester: null});
         }
+
+        let bottomHalf = null;
+        let curriculumText = (<h4>Please select a curriculum option:</h4>);
+        if(!this.state.confirmScreen) {
+            bottomHalf = (
+                    <div className = "buttonDiv" id="curriculumButtonDiv">
+                        <button className="textBox curriculumButton" id="CreateCurriculumButton"
+                        onClick={() => this.CreateCurriculum()}>Create Curriculum</button>
+                        
+                        <button className="textBox curriculumButton" id="OldCurriculumButton"
+                        onClick={() => this.LoadOldCurriculum()}>Use Old Curriculum</button>
+                    </div>
+            );
+        } else {
+            curriculumText = (
+                <div>
+                    <h2>Curriculum Selected: {this.state.classDetails.curriculum}</h2>
+                    <h2>Task List Selected: {this.state.classDetails.taskList}</h2>
+                </div>
+            );
+            bottomHalf = (
+                <div className = "buttonDiv" id="curriculumButtonDiv">
+                    <br/>
+                    <button className="textBox curriculumButton" id="saveClassSettings" onClick={() => {this.saveConfirm(this)}}>Save</button>
+                    <button className="textBox curriculumButton" id="cancelClassSettings" onClick={() => {this.cancelConfirm(this)}}>Cancel</button>
+                </div>
+        );
+        }
+
         let createClassHomeIframe = (
             <div className="iframeContent">
                 <h1>Create Class</h1>
@@ -86,23 +116,22 @@ export default class CreateClassIframe extends React.Component {
                     value={semesterInitValue} onChange={() => this.apdateHomeValues()} />
                 </div>
                 <br/>
-                <h4>Please select a curriculum option:</h4>
-                <div className = "buttonDiv" id="curriculumButtonDiv">
-                    <button className="textBox curriculumButton" id="CreateCurriculumButton"
-                    onClick={() => this.CreateCurriculum()}>Create Curriculum</button>
-                    
-                    <button className="textBox curriculumButton" id="OldCurriculumButton"
-                    onClick={() => this.LoadOldCurriculum()}>Use Old Curriculum</button>
-                </div>
+                <br/>
+                {curriculumText}
+                {bottomHalf}
             </div>
         );
+
+        const classDetails = {code: this.props.classCode, start: this.props.startYear, end: this.props.endYear, semester :this.props.semester};
+
         let createCurriculumIframe = (
                 <CreateNewCurriculum classCode={this.props.classCode? this.props.classCode : "Class Code Not Given"}/>
         );
 
         let loadOldCurriculumIframe = (
             <div className="iframeContent">
-                <LoadOldCurriculum classCode={this.props.classCode? this.props.classCode : "Class Code Not Given"}/>
+                <LoadOldCurriculum classCode={this.props.classCode? this.props.classCode : "Class Code Not Given"}
+                changeToConfirm={this.changeToConfirm.bind(this)} classDetails={classDetails}/>
             </div>
         );
         let iframeCurrentWindow = createClassHomeIframe;
@@ -123,7 +152,21 @@ export default class CreateClassIframe extends React.Component {
     CreateCurriculum() {
         this.setState({iframeWindow: 1});
     }
+
     LoadOldCurriculum() {
         this.setState({iframeWindow: 2});
+    }
+
+    changeToConfirm(classDetails) {
+        this.setState({iframeWindow: 0, confirmScreen: true, classDetails: classDetails, classCode: classDetails.code,
+            startYear: classDetails.start, endYear: classDetails.end, semester: classDetails.semester});
+    }
+
+    cancelConfirm() {
+        alert("CANCEL NOT IMPLEMENTED YET");
+    }
+
+    saveConfirm() {
+        alert("SAVE NOT IMPLEMENTED YET");
     }
 }
