@@ -125,7 +125,8 @@ export default class CreateClassIframe extends React.Component {
         const classDetails = {code: this.props.classCode, start: this.props.startYear, end: this.props.endYear, semester :this.props.semester};
 
         let createCurriculumIframe = (
-                <CreateNewCurriculum classCode={this.props.classCode? this.props.classCode : "Class Code Not Given"}/>
+                <CreateNewCurriculum classCode={this.props.classCode? this.props.classCode : "Class Code Not Given"}
+                changeToConfirm={this.changeToConfirm.bind(this)} classDetails={classDetails}/>
         );
 
         let loadOldCurriculumIframe = (
@@ -163,7 +164,7 @@ export default class CreateClassIframe extends React.Component {
     }
 
     cancelConfirm() {
-        alert("CANCEL NOT IMPLEMENTED YET");
+        this.setState({confirmScreen: false});
     }
 
     saveConfirm() {
