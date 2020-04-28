@@ -7,6 +7,7 @@ import com.google.gson.JsonElement;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -62,4 +63,20 @@ public class JMRestController {
     public String getSpecificTask(@PathVariable("id") String id, @PathVariable("taskName") String taskName, @PathVariable("taskId") String taskId){
         return (GetCurriculumAndTasks.getSpecificTask(id, taskName, taskId));
     }
+
+    @PostMapping("/curriculum/newName/{name}")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public void setName(@PathVariable("name") String name){
+        CreateClassDataSorting.setSavedname(name);
+        System.out.println("Here");
+    }
+
+    @PostMapping("/curriculum/addCurriculum/{curriculum}/{number}")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public void addCurriculum(@PathVariable("curriculum") String curriculum, @PathVariable("number") int number){
+        CreateClassDataSorting.setCurriculum(curriculum, number);
+        System.out.println("Here");
+    }
+
+
 }
