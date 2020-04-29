@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
@@ -90,7 +92,7 @@ public class JMRestController {
         CreateClassDataSorting.setTasks(task, number);
         System.out.println("In addTask");
     }
-
+    //this allows port 3000(react/client) to post to the api
     @Bean
     public FilterRegistrationBean<CorsFilter> simpleCorsFilter() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
@@ -104,11 +106,10 @@ public class JMRestController {
         bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
         return bean;
     }
-
-    @GetMapping("/user")
+    //this is where the client will test posting to the api (/api/data/user)
+    @RequestMapping(value = "/user", method = {RequestMethod.GET, RequestMethod.POST})
     @CrossOrigin(origins = "http://localhost:3000")
     public String userTest() {
-        return "ALL GOOD";
+        return "here";
     }
-
 }

@@ -57,16 +57,23 @@ export default class CreateNewCurriculum extends React.Component {
         })
     }
 
+    doTest = () => {
+        /*fetch('http://localhost:8080/api/data/user').then(Response => {return Response.config}).then(message => {
+            console.log(message);
+        });*/
+        axios.get('http://localhost:8080/api/data/user').then(res => {console.log(res.config.data)});
+    }
+
     render() {
-        this.postData({answer: '42'}).then(data => {console.log(data)});
-        this.getTest();
+        //this.getTest();
         const testInformation = {
             name: "Danel Polyakov",
             age: "17",
             grade: "12",
             highSchool: "Earl of March"
         };
-        axios.post("http://localhost:8080/api/data/user", testInformation).then(response => {console.log(response)});
+        axios.post("http://localhost:8080/api/data/user", testInformation);//.then(response => {console.log(response)});
+        this.doTest();
         let courseCode = this.courseCodeFromClassCode(this.props.classDetails.code);
         let pureCurriculumName = courseCode + "_" + this.props.classDetails.start + "-" + this.props.classDetails.end;
         //console.log(pureCurriculumName);
