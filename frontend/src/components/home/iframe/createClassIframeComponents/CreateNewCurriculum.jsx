@@ -39,6 +39,13 @@ export default class CreateNewCurriculum extends React.Component {
         const Response = await fetch('http://localhost:8080/api/data/user', {
             method: 'POST',
             mode: 'cors',
+            cache: 'no-cache',
+            credentials: 'include',
+            headers: {
+                'Access-Control-Allow-Origin': 'http://localhost:3000'
+            },
+            redirect: 'follow',
+            referrerPolicy: 'no-referrer',
             body: JSON.stringify(data)
         });
         return Response.json();
