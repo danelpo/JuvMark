@@ -68,14 +68,21 @@ public class JMRestController {
     @CrossOrigin(origins = "http://localhost:3000")
     public void setName(@PathVariable("name") String name){
         CreateClassDataSorting.setSavedname(name);
-        System.out.println("Here");
+        System.out.println("In setName");
     }
 
     @PostMapping("/curriculum/addCurriculum/{curriculum}/{number}")
     @CrossOrigin(origins = "http://localhost:3000")
     public void addCurriculum(@PathVariable("curriculum") String curriculum, @PathVariable("number") int number){
         CreateClassDataSorting.setCurriculum(curriculum, number);
-        System.out.println("Here");
+        System.out.println("In addCurriculum");
+    }
+
+    @PostMapping("/curriculum/addTask/{task}/{number}")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public void addTask(@PathVariable("task") String task, @PathVariable("number") int number){
+        CreateClassDataSorting.setTasks(task, number);
+        System.out.println("In addTask");
     }
 
 
