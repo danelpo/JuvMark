@@ -35,45 +35,9 @@ export default class CreateNewCurriculum extends React.Component {
         fetch('http://localhost:8080/api/data/curriculum').then(Response => {return Response.json()}).then(message => {this.setState({allCurriculumsArray: message})});        
     }
 
-    async postData(data = {}) {
-        const Response = await fetch('http://localhost:8080/api/data/user', {
-            method: 'POST',
-            mode: 'cors',
-            cache: 'no-cache',
-            credentials: 'include',
-            headers: {
-                'Access-Control-Allow-Origin': 'http://localhost:3000'
-            },
-            redirect: 'follow',
-            referrerPolicy: 'no-referrer',
-            body: JSON.stringify(data)
-        });
-        return Response.json();
-    }
-
-    getTest = () => {
-        fetch('http://localhost:8080/api/data/curriculum/ICS4U_2019-2020_2/tasks/ICS4U_2019-2020_2/T1').then(Response => {return Response.json()}).then(message => {
-            //console.log(message);
-        })
-    }
-
-    doTest = () => {
-        /*fetch('http://localhost:8080/api/data/user').then(Response => {return Response.config}).then(message => {
-            console.log(message);
-        });*/
-        axios.get('http://localhost:8080/api/data/user').then(res => {console.log(res.config.data)});
-    }
-
     render() {
-        //this.getTest();
-        const testInformation = {
-            name: "Danel Polyakov",
-            age: "17",
-            grade: "12",
-            highSchool: "Earl of March"
-        };
-        axios.post("http://localhost:8080/api/data/user", testInformation);//.then(response => {console.log(response)});
-        this.doTest();
+        let myTestString = "IT FUCKING WORKS BABY WOOOOOOOOOOOO FUCK YEA";
+        axios.post(`http://localhost:8080/api/data/curriculum/newName/${myTestString}`).then(response => {console.log(response)});
         let courseCode = this.courseCodeFromClassCode(this.props.classDetails.code);
         let pureCurriculumName = courseCode + "_" + this.props.classDetails.start + "-" + this.props.classDetails.end;
         //console.log(pureCurriculumName);

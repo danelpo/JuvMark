@@ -75,8 +75,9 @@ public class JMRestController {
     @PostMapping("/curriculum/newName/{name}")
     @CrossOrigin(origins = "http://localhost:3000")
     public void setName(@PathVariable("name") String name){
-        CreateClassDataSorting.setSavedname(name);
+        //CreateClassDataSorting.setSavedname(name);
         System.out.println("In setName");
+        System.out.println(name);
     }
 
     @PostMapping("/curriculum/addCurriculum/{curriculum}/{number}")
@@ -105,11 +106,5 @@ public class JMRestController {
         FilterRegistrationBean<CorsFilter> bean = new FilterRegistrationBean<>(new CorsFilter(source));
         bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
         return bean;
-    }
-    //this is where the client will test posting to the api (/api/data/user)
-    @RequestMapping(value = "/user", method = {RequestMethod.GET, RequestMethod.POST})
-    @CrossOrigin(origins = "http://localhost:3000")
-    public String userTest() {
-        return "here";
     }
 }
