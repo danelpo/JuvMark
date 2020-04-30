@@ -1,15 +1,23 @@
 package com.myapp.juvmark;
 
 import java.util.List;
-
-import com.google.gson.JsonElement;
-
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.context.annotation.Bean;
+import org.springframework.core.Ordered;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
+import java.util.Arrays;
+import java.util.Collections;
 
 @RestController
 @RequestMapping("/api/data")
@@ -84,6 +92,24 @@ public class JMRestController {
         CreateClassDataSorting.setTasks(task, number);
         System.out.println("In addTask");
     }
-
-
+    //this allows port 3000(react/client) to post to the api
+    @Bean
+    public FilterRegistrationBean<CorsFilter> simpleCorsFilter() {
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        CorsConfiguration config = new CorsConfiguration();
+        config.setAllowCredentials(true);
+        config.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
+        config.setAllowedMethods(Collections.singletonList("*"));
+        config.setAllowedHeaders(Collections.singletonList("*"));
+        source.registerCorsConfiguration("/**", config);
+        FilterRegistrationBean<CorsFilter> bean = new FilterRegistrationBean<>(new CorsFilter(source));
+        bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
+        return bean;
+    }
+    //this is where the client will test posting to the api (/api/data/user)
+    @RequestMapping(value = "/user", method = {RequestMethod.GET, RequestMethod.POST})
+    @CrossOrigin(origins = "http://localhost:3000")
+    public String userTest() {
+        return "here";
+    }
 }
