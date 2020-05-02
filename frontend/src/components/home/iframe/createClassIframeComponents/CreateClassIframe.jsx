@@ -44,8 +44,18 @@ export default class CreateClassIframe extends React.Component {
             this.props.changeProps("semester", semesterValue);
     }
 
+    componentDidMount() {
+        this.apdateHomeValues();
+    }
+
     render() {
-        let classCodeInitValue, startYearInitValue, endYearInitValue, semesterInitValue = null;
+        
+        let classCodeInitValue = "ICS4U-01";
+        let startYearInitValue = "2019";
+        let endYearInitValue = "2020";
+        let semesterInitValue = "2";
+        
+        //let classCodeInitValue, startYearInitValue, endYearInitValue, semesterInitValue = null;
 
         if(this.state.classCode) {
             classCodeInitValue = this.state.classCode;
@@ -140,6 +150,7 @@ export default class CreateClassIframe extends React.Component {
             iframeCurrentWindow = createCurriculumIframe;
         else if(this.state.iframeWindow === 2)
             iframeCurrentWindow = loadOldCurriculumIframe;
+
         return(
             iframeCurrentWindow 
         )
@@ -151,7 +162,23 @@ export default class CreateClassIframe extends React.Component {
     2: old curriculum
     */
     CreateCurriculum() {
-        this.setState({iframeWindow: 1});
+        let arrayOfErrors = [];
+        let arrayOfLife = [
+            document.getElementById("classCodeBox"), document.getElementById("startYearBox"),
+            document.getElementById("endYearBox"), document.getElementById("semesterBox")
+        ];
+
+        for (let i = 0; i < arrayOfLife.length; i++) {
+            if(arrayOfLife[i].value === null)
+                arrayOfErrors.push(arrayOfLife[i]);
+            else if(arrayOfLife[i].value.replace(/\s/g, "") === "")
+                arrayOfErrors.push(arrayOfLife[i]);
+        }
+        if(arrayOfErrors.length !== 0) {
+            console.log("PLEASE FILL IN ALL INFORMATION");
+        }
+        else
+            this.setState({iframeWindow: 1});
     }
 
     LoadOldCurriculum() {
