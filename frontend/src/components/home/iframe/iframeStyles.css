@@ -141,7 +141,7 @@
     text-align: center;
 }
 
-#saveButtonForCreateCurriculum {
+.saveButtonForCreateCurriculum {
     position: absolute;
     top: 2%;
     right: 5%;
