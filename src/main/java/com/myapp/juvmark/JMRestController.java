@@ -75,7 +75,7 @@ public class JMRestController {
     @PostMapping("/curriculum/newName/{name}")
     @CrossOrigin(origins = "http://localhost:3000")
     public void setName(@PathVariable("name") String name){
-        //CreateClassDataSorting.setSavedname(name);
+        CreateClassDataSorting.setSavedname(name);
         System.out.println("In setName");
         System.out.println(name);
     }
