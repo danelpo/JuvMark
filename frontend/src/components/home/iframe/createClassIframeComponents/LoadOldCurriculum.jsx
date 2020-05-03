@@ -95,7 +95,6 @@ export default class LoadOldCurriculum extends React.Component {
                 changeToConfirm={this.props.changeToConfirm} classDetails={this.state.classDetails}/>
             );
         }
-
         return projectedScreen;
     }
 }

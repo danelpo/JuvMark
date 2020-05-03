@@ -118,3 +118,31 @@
 #cancelClassSettings {
     left: 3%;
 }
+
+.popupBackgroundDiv {
+    z-index: 100;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.popupItself {
+    position: absolute;
+    width: 50%;
+    height: 50%;
+    left: 25%;
+    top: 25%;
+    z-index: 101;
+    background-color: white;
+    border-radius: 5%;
+    border: 2px solid gray;
+    align-content: center;
+    text-align: center;
+}
+
+#saveButtonForCreateCurriculum {
+    position: absolute;
+    top: 2%;
+    right: 5%;
+}
