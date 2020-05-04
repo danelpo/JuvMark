@@ -1,9 +1,12 @@
 package com.myapp.juvmark;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -18,6 +21,7 @@ public class CreateClassDataSorting {
     static String csvCurriculumPath;
     static String JSONCurriculumPath;
     static String JSONTaskPath;
+    static String JSONCurTask;
 
     Gson curriculumJSON = new GsonBuilder().setPrettyPrinting().create();
     Gson taskJSON = new GsonBuilder().setPrettyPrinting().create();
@@ -128,7 +132,7 @@ public class CreateClassDataSorting {
     }
 
     // Accepts passed in tasks
-    public static void setTasks(String passedTasks, int number) {
+    public static void setTasks(String curName, String passedTasks, int number) {
         String tasknumber = "null";
         String curriculumNumbers = "null";
         String[] curriculumNumbersArray = null;
@@ -210,6 +214,42 @@ public class CreateClassDataSorting {
             taskDetails.add("Curriculums", curriculumArrayJson);
             taskDetails.addProperty("Description", description);
             
+            //CurTaskMapping Json
+            File directory = new File("Data/CurTaskMapping");
+    
+            //get all the files from a directory
+            File[] fList = directory.listFiles();
+            for (File file : fList){
+                if (file.isFile()){
+                    //System.out.println(file.getName());
+                    String temp = file.getName();
+                    
+                    if(temp.contains(curName)){
+                        file.delete();
+                        System.out.println("Deleted old mapping");
+                    }
+                }
+            }
+
+            try {
+                JSONCurTask = "Data/CurTaskMapping/" + curName + ".json" ;
+                FileWriter fw = new FileWriter(JSONCurTask, true);
+                BufferedWriter bw = new BufferedWriter(fw);
+                PrintWriter pw = new PrintWriter(bw);
+                
+                pw.println("{\"" + curName + "\":{");
+                pw.println("\t" + "\"Curriculum\"" + ":\""+ curName + "\",");
+                pw.println("\t" + "\"Task\"" + ":\""+ savedname + "\"");
+                pw.println("}}");
+                pw.flush();
+                pw.close();
+    
+                System.out.println("Successfully interacted with task JSON File");
+            } catch (final IOException e) {
+                System.out.println("Error with task JSON");
+            }
+
+            //Task Json
             try {
                 FileWriter fw = new FileWriter(JSONTaskPath, true);
                 BufferedWriter bw = new BufferedWriter(fw);

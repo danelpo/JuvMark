@@ -6,8 +6,13 @@ public class TestingClass {
        
         
 
-        //DirectoryInitialization.Setup();
-       // GetCurriculumAndTasks.getCurriculum("ICS4U_2019-2020_2");
+        DirectoryInitialization.Setup();
+        CreateClassDataSorting.setSavedname("MCV4U_2019-2020_4");
+        CreateClassDataSorting.setTasks("MCV4U_2019-2020_2","T1_A1-B1-C1_des crisp", 1);
+        CreateClassDataSorting.setTasks("MCV4U_2019-2020_2","Q1_A2-A3-B1-C1-C3_descrip", 0);
+        CreateClassDataSorting.setTasks("MCV4U_2019-2020_2","Q2_A2-A3-B3_description", 0);
+        CreateClassDataSorting.setTasks("MCV4U_2019-2020_2","T2_B3-B4-C2-D1_des,cription", 2);
+       //GetCurriculumAndTasks.getCurriculum("ICS4U_2019-2020_2");
        //GetCurriculumAndTasks.getSpecificTask("ICS4U_2019-2020_2", "ICS4U_2019-2020_2", "T7");
        //ListFiles.listTasks("ICS4U_2019-2020_2");
         

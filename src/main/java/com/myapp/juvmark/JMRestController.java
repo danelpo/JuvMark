@@ -21,30 +21,35 @@ import java.util.Collections;
 @RequestMapping("/api/data")
 public class JMRestController {
 
+    //List Curriculum
     @GetMapping("/curriculum")
     @CrossOrigin(origins = "http://localhost:3000")
     public List<String> allCurriculums() {
         return(ListFiles.listCurriculum("Data/Curriculums"));
     }
 
+    //All curriculums
     @GetMapping("/curriculum/{id}")
     @CrossOrigin(origins = "http://localhost:3000")
     public String getCurriculum(@PathVariable("id") String id){
         return(GetCurriculumAndTasks.getCurriculum(id));
     }
 
+    //Curriculum numbers of specified curriculum
     @GetMapping("/curriculum/{id}/numbers")
     @CrossOrigin(origins = "http://localhost:3000")
     public List<String> getCurriculumNumbers(@PathVariable("id") String id){
         return (GetCurriculumAndTasks.getCurriculumNumbers(id));
     }
 
+    //All numbers and descriptions of specific curriculum
     @GetMapping("/curriculum/{id}/all")
     @CrossOrigin(origins = "http://localhost:3000")
     public List<String> getAllCurriculum(@PathVariable("id") String id){
         return (GetCurriculumAndTasks.getCurriculumNumberAndDescription(id));
     }
 
+    //Values of a specific curriculum expectation
     @GetMapping("/curriculum/{id}/{curId}")
     @CrossOrigin(origins = "http://localhost:3000")
     public List<String> getAllCurriculum(@PathVariable("id") String id, @PathVariable("curId") String curId){
@@ -56,6 +61,7 @@ public class JMRestController {
     @CrossOrigin(origins = "http://localhost:3000")
     public List<String> getTasks(@PathVariable("id") String id){
         return ListFiles.listTasks(id);
+
     }
 
     @GetMapping("/curriculum/{id}/tasks/{taskName}")
@@ -74,10 +80,6 @@ public class JMRestController {
     @CrossOrigin(origins = "http://localhost:3000")
     public void setName(@PathVariable("name") String name){
         CreateClassDataSorting.setSavedname(name);
-<<<<<<< HEAD
-        System.out.println("In setName");
-=======
->>>>>>> adb2765b4af34bd91180695ddcfcde731e1c61f3
         System.out.println(name);
     }
 
@@ -88,10 +90,10 @@ public class JMRestController {
         System.out.println("In addCurriculum");
     }
 
-    @PostMapping("/curriculum/addTask/{task}/{number}")
+    @PostMapping("/curriculum/addTask/{curName}/{task}/{number}")
     @CrossOrigin(origins = "http://localhost:3000")
-    public void addTask(@PathVariable("task") String task, @PathVariable("number") int number){
-        CreateClassDataSorting.setTasks(task, number);
+    public void addTask(@PathVariable("curName") String curName, @PathVariable("task") String task, @PathVariable("number") int number){
+        CreateClassDataSorting.setTasks(curName, task, number);
         System.out.println("In addTask");
     }
     
