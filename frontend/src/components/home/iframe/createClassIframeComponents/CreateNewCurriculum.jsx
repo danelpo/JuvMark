@@ -4,6 +4,7 @@ import AddIcon from '@material-ui/icons/Add';
 import SaveIcon from '@material-ui/icons/Save';
 import DataGrid from 'react-data-grid';
 import CreateNewTaskList from './CreateNewTaskList.jsx';
+import axios from 'axios';
 
 export default class CreateNewCurriculum extends React.Component {
 
@@ -13,7 +14,7 @@ export default class CreateNewCurriculum extends React.Component {
             allCurriculumsArray: null,
             curriculumName: null,
             columns: [{key: 'expectation', name: 'Expectation'},{key: 'desc', name: 'Description'}],
-            rows: [],
+            rows: [{expectation: "A3", desc:"This is the A3 curriculum"},{expectation: "A2", desc:"This is the A2 curriculum"},{expectation: "A1", desc:"This is the A1 curriculum"}],
             displayTaskList: false,
         }
     }
@@ -30,20 +31,18 @@ export default class CreateNewCurriculum extends React.Component {
 
     validateCurriculumName = curriculumPureName => {
         const defaultName = curriculumPureName + "_1";
-        if(this.state.allCurriculumsArray) {
-            const allCurriculums = this.state.allCurriculumsArray;
-            const allCurriculumsPureNames = this.purifyArray(allCurriculums);
-            if(allCurriculumsPureNames.includes(curriculumPureName)) {
-                const curriculumIndex = this.countHowManyInArray(allCurriculumsPureNames, curriculumPureName);
-                let indexCorrection = 0;
-                let suggestedName;
-                do {
-                    indexCorrection++;
-                    let index = curriculumIndex + indexCorrection;
-                    suggestedName = curriculumPureName + "_" + index;
-                } while(allCurriculums.includes(suggestedName));
-                return suggestedName;
-            }
+        const allCurriculums = this.state.allCurriculumsArray;
+        const allCurriculumsPureNames = this.purifyArray(allCurriculums);
+        if (allCurriculumsPureNames.includes(curriculumPureName)) {
+            const curriculumIndex = this.countHowManyInArray(allCurriculumsPureNames, curriculumPureName);
+            let indexCorrection = 0;
+            let suggestedName;
+            do {
+                indexCorrection++;
+                let index = curriculumIndex + indexCorrection;
+                suggestedName = curriculumPureName + "_" + index;
+            } while (allCurriculums.includes(suggestedName));
+            return suggestedName;
         }
         return defaultName;
     }
@@ -75,11 +74,8 @@ export default class CreateNewCurriculum extends React.Component {
     }
 
     componentDidMount() {
-        fetch('http://localhost:8080/api/data/curriculum').then(Response => {return Response.json()}).then(message => {this.setState({allCurriculumsArray: message})});
-        let courseCode = this.courseCodeFromClassCode(this.props.classDetails.code);
-        let pureCurriculumName = courseCode + "_" + this.props.classDetails.start + "-" + this.props.classDetails.end;
-        let proposedCurriculumName = this.validateCurriculumName(pureCurriculumName);
-        this.setState({curriculumName: proposedCurriculumName}); 
+        fetch('http://localhost:8080/api/data/curriculum').then(Response => {return Response.json()}).then(message => {
+            this.setState({allCurriculumsArray: message})});
     }
 
     closePopup = () => {
@@ -130,6 +126,10 @@ export default class CreateNewCurriculum extends React.Component {
         descriptionTextbox.style.width = "65%";
         descriptionTextbox.style.font = "normal 2vmin ariel,serif";
         descriptionTextbox.style.resize = "none";
+        descriptionTextbox.onkeypress = e => {
+            if(e.keyCode === 13)
+                e.preventDefault();
+        }//cancels Enter from registering
 
         let Break1 = document.createElement("br");
         popupDiv.appendChild(Break1);
@@ -163,12 +163,30 @@ export default class CreateNewCurriculum extends React.Component {
     }
 
     saveCurriculum = () => {
-        //if(this.state.rows.length > 0)
+        if(this.state.rows.length > 0) {
+            axios.post(`http://localhost:8080/api/data/curriculum/newName/${this.state.curriculumName}`);
+            for(let i = 0; i < this.state.rows.length; i++) {
+                const curriculum = this.state.rows[i].expectation + "_" + this.state.rows[i].desc;
+                if(i === 0) {
+                    axios.post(`http://localhost:8080/api/data/curriculum/addCurriculum/${curriculum}/1`);
+                } else if(i === this.state.rows.length-1) {
+                    axios.post(`http://localhost:8080/api/data/curriculum/addCurriculum/${curriculum}/2`);
+                }else {
+                    axios.post(`http://localhost:8080/api/data/curriculum/addCurriculum/${curriculum}/0`);
+                }
+            }
             this.setState({displayTaskList: true});
+        }
     }
 
     render() {
-        //axios.post(`http://localhost:8080/api/data/curriculum/newName/${proposedCurriculumName}`);
+        if(!this.state.curriculumName && this.state.allCurriculumsArray) {
+            let courseCode = this.courseCodeFromClassCode(this.props.classDetails.code);
+            let pureCurriculumName = courseCode + "_" + this.props.classDetails.start + "-" + this.props.classDetails.end;
+            let curriculumName = this.validateCurriculumName(pureCurriculumName);
+            this.setState({curriculumName}); 
+        }
+
         let myNumber;
         if(document.body.getElementsByClassName("iframeContent")) {
             myNumber = document.body.getElementsByClassName("iframeContent")[0].getBoundingClientRect().height * 0.75;
@@ -177,7 +195,7 @@ export default class CreateNewCurriculum extends React.Component {
             return(
                 <div className="iframeContent">
                     <h2>Creating Curriculum: {this.state.curriculumName}</h2>
-                    <SaveIcon id="saveButtonForCreateCurriculum" style={{fontSize: 40}} onClick={() => {this.saveCurriculum(this)}}/>
+                    <SaveIcon className="saveButtonForCreateCurriculum" style={{fontSize: 40}} onClick={() => {this.saveCurriculum(this)}}/>
                     <DataGrid columns={this.state.columns} rows={this.state.rows} height={myNumber}/>
                     <AddIcon style={{fontSize: 80}} onClick={() => {this.getRowInfo(this)}}/>
                 </div>

@@ -2,6 +2,7 @@ import React from 'react';
 import DataGrid from 'react-data-grid';
 import Select from 'react-select';
 import '../iframeStyles.css';
+import CreateNewTaskList from './CreateNewTaskList';
 
 export default class TaskListOptionScreen extends React.Component {
     //props loadOld if false: creating new, hide select old task list
@@ -17,6 +18,7 @@ export default class TaskListOptionScreen extends React.Component {
             openOption: null,
             curriculumTaskListTasks: null,
             selectOldTaskListState: false,
+            loadCreateNewTaskList: false,
         }
     }
 
@@ -82,52 +84,60 @@ export default class TaskListOptionScreen extends React.Component {
         this.props.changeToConfirm(newJsonObject);
     }
 
+    createNewTaskList = () => {
+        this.setState({loadCreateNewTaskList: true});
+    }
+
     render() {
-        let optionMenu, taskTable, optionButtons = null;
-        if(this.state.selectOldTaskListState) {
-            optionMenu = (
-                <Select className="loadCurriculumDropDownMenu" value={this.state.openOption} onChange={this.handleChange} options={this.options()}/>
-            );
-            
-            if(this.state.openOption) {
-                const columns = [{key: 'taskNumber', name: 'Task Number'},{key: 'expectations', name: 'Expectations in Curriculum'},{key: 'taskDesc', name: 'Task Description'}];
-                let rows = this.getRowsForTask();
-                taskTable = (
-                    <div className="selectOldTasksDiv">
-                        <DataGrid columns={columns} rows={rows}/>
-                    </div>
+        if(this.state.loadCreateNewTaskList === false) {
+            let optionMenu, taskTable, optionButtons = null;
+            if(this.state.selectOldTaskListState) {
+                optionMenu = (
+                    <Select className="loadCurriculumDropDownMenu" value={this.state.openOption} onChange={this.handleChange} options={this.options()}/>
                 );
-
-                optionButtons = (
-                    <div className="taskOptionsButtonDiv">
-                            <button className="taskOptionButton" id="saveTaskButton" onClick={() => {this.bringToConfirmHomeScreen(this)}}>Save</button>
-                            <button className="taskOptionButton" id="cancelTaskButton" onClick={() => {this.cancelTaskView(this)}}>Cancel</button>
-                    </div>
-                );
-
-                document.getElementById("selectOldTaskButton").disabled = true;
-                document.getElementById("createNewTaskButton").disabled = true;
-            } else {
-                document.getElementById("selectOldTaskButton").disabled = false;
-                document.getElementById("createNewTaskButton").disabled = false;
-            }
-        }
-        return(
-            <div className="taskListMainScreen">
-                        <h2>Please select an option for your tasks</h2>
-                        <h4>Tasks include all tests, quizzes, asignments and evaluations</h4>
-                        <br/>
-                        <div className="taskOptionsButtonDiv">
-                            <button className="taskOptionButton" id="selectOldTaskButton" onClick={() => {this.selectOldTaskListFunction(this)}}>Select Old Task List</button>
-                            <button className="taskOptionButton" id="createNewTaskButton">Create New Task List</button>
+                
+                if(this.state.openOption) {
+                    const columns = [{key: 'taskNumber', name: 'Task Number'},{key: 'expectations', name: 'Expectations in Curriculum'},{key: 'taskDesc', name: 'Task Description'}];
+                    let rows = this.getRowsForTask();
+                    taskTable = (
+                        <div className="selectOldTasksDiv">
+                            <DataGrid columns={columns} rows={rows}/>
                         </div>
-                        <br/>
-                        {optionMenu}
-                        <br/>
-                        {taskTable}
-                        <br/>
-                        {optionButtons}
-                    </div>
-        )
+                    );
+
+                    optionButtons = (
+                        <div className="taskOptionsButtonDiv">
+                                <button className="taskOptionButton" id="saveTaskButton" onClick={() => {this.bringToConfirmHomeScreen(this)}}>Save</button>
+                                <button className="taskOptionButton" id="cancelTaskButton" onClick={() => {this.cancelTaskView(this)}}>Cancel</button>
+                        </div>
+                    );
+
+                    document.getElementById("selectOldTaskButton").disabled = true;
+                    document.getElementById("createNewTaskButton").disabled = true;
+                } else {
+                    document.getElementById("selectOldTaskButton").disabled = false;
+                    document.getElementById("createNewTaskButton").disabled = false;
+                }
+            }
+        
+            return(
+                <div className="taskListMainScreen">
+                            <h2>Please select an option for your tasks</h2>
+                            <h4>Tasks include all tests, quizzes, asignments and evaluations</h4>
+                            <br/>
+                            <div className="taskOptionsButtonDiv">
+                                <button className="taskOptionButton" id="selectOldTaskButton" onClick={() => {this.selectOldTaskListFunction(this)}}>Select Old Task List</button>
+                                <button className="taskOptionButton" id="createNewTaskButton" onClick={() => {this.createNewTaskList(this)}}>Create New Task List</button>
+                            </div>
+                            <br/>
+                            {optionMenu}
+                            <br/>
+                            {taskTable}
+                            <br/>
+                            {optionButtons}
+                        </div>
+            );
+        }
+        return <CreateNewTaskList curriculumName={this.state.curriculumName}/>
     }
 }
