@@ -206,12 +206,3 @@ export default class CreateNewCurriculum extends React.Component {
         );
     }
 }
-
-window.onkeyup = e => {
-    if(document.getElementById("createCurriculumPopupBackground")) {
-        if(e.key === "Escape")
-            document.getElementById("createCurriculumPopupBackground").click();
-        else if(e.key === "Enter")
-            document.getElementById("saveUserInputInCreateCurriculumButton").click();
-    }
-}

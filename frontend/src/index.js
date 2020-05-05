@@ -15,3 +15,21 @@ ReactDOM.render(
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
+
+document.onkeyup = e => {
+  //popup when creating a new curriculum
+  if(document.getElementById("createCurriculumPopupBackground")) {
+    if(e.key === "Escape")
+      document.getElementById("createCurriculumPopupBackground").click();
+    else if(e.key === "Enter")
+      document.getElementById("saveUserInputInCreateCurriculumButton").click();
+  }
+
+  //popup when creating a new tasks list
+  if(document.getElementById("createTaskListPopupBackground")) {
+    if(e.key === "Escape")
+      document.getElementById("createTaskListPopupBackground").click();
+    else if(e.key === "Enter")
+      document.getElementById("saveUserInputInCreateTaskListButton").click();
+  }
+}

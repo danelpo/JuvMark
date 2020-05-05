@@ -53,14 +53,14 @@ public class ListFiles {
             if (file.isFile()){
                 //System.out.println(file.getName());
                 String temp = file.getName();
-                
+               
                 //Check for files containing the passed in class
                 if(temp.contains(classFile)){
                    
                     //Removes the .json
                     for (int i = 0; i < temp.length(); i++) {
                     final char dotFinder2 = temp.charAt(i);
-        
+                   
                     if (dotFinder2 == '.') {
                         int dotLocation = i;
                         temp = temp.substring(0, dotLocation-5);
