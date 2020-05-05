@@ -5,7 +5,7 @@ public class TestingClass {
     public static void Test(){
        
         
-
+        /*
         DirectoryInitialization.Setup();
         CreateClassDataSorting.setSavedname("MCV4U_2019-2020_4");
         CreateClassDataSorting.setTasks("MCV4U_2019-2020_2","T1_A1-B1-C1_des crisp", 1);

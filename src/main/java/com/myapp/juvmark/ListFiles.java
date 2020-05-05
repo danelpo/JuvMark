@@ -39,14 +39,15 @@ public class ListFiles {
 
         //Isolate class code
         for (int i = 0; i < classFile.length(); i++) {
-            char dotFinder1 = classFile.charAt(i);
-
-            if (dotFinder1 == '.') {
-                int dotLocation1 = i;
-                classFile = classFile.substring(0, dotLocation1);
+            char underscoreFinder = classFile.charAt(i);
+            
+            if (underscoreFinder == '_') {
+                int underscoreLocation = i;
+                classFile = classFile.substring(0, underscoreLocation);
+                //System.out.println(classFile);
             }
         }
-       
+        
         //Get all the files from a directory
         File[] fList = directory.listFiles();
         for (File file : fList){
