@@ -169,7 +169,7 @@ export default class CreateNewCurriculum extends React.Component {
             );
         }
         return(
-            <CreateNewTaskList classDetails={this.state.classDetails}/>
+            <CreateNewTaskList changeToConfirm={this.props.changeToConfirm} classDetails={this.state.classDetails}/>
         );
     }
 }

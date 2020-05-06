@@ -143,7 +143,7 @@ export default class CreateNewTaskList extends React.Component {
             });
             let updateJSON = this.props.classDetails;
             updateJSON.taskList = this.state.taskListName;
-            this.setState({classDetails: updateJSON});
+            this.props.changeToConfirm(updateJSON);
         }
     }
 

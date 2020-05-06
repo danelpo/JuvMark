@@ -95,6 +95,18 @@ public class JMRestController {
     public void addTask(@PathVariable("curName") String curName, @PathVariable("task") String task, @PathVariable("number") int number){
         CreateClassDataSorting.setTasks(curName, task, number);
     }
+
+    /*className will be in the format classCode_date. example: ICS4M-02_2019-2020 or HIV4U-08_2021-2021
+    * curriculumName will be the name of the curriculum. example: CUM2D_2019-2020_2
+    * taskListName will be the name of the task list. example: POOPSICLE3X_2029-2029_3
+    */
+    @PostMapping("/class/createClass/{className}/{curriculumName}/{taskListName}")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public void createNewClass(@PathVariable("className") String className, @PathVariable("curriculumName") String curName, @PathVariable("taskListName") String task){
+        System.out.println("creating class " + className);
+        System.out.println("with curriculum " + curName);
+        System.out.println("and with task list " + task);
+    }
     
     //this allows port 3000(react/client) to post to the api
     @Bean

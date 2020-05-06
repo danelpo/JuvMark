@@ -14,7 +14,6 @@ export default class HomeScreen extends React.Component {
             createClass_ClassCode: null,
             createClass_startYear: null,
             createClass_endYear: null,
-            createClass_semester: null,
             createClass_curriculum: null,
             createClass_taskList: null,
             home: this,
@@ -57,8 +56,6 @@ export default class HomeScreen extends React.Component {
             this.setState({createClass_startYear: value});
         } else if(prop === "endYear") {
             this.setState({createClass_endYear: value});
-        } else if(prop === "semester") {
-            this.setState({createClass_semester: value});
         }
     }
 
@@ -107,7 +104,6 @@ export default class HomeScreen extends React.Component {
                 classCode={this.state.createClass_ClassCode}
                 startYear={this.state.createClass_startYear}
                 endYear={this.state.createClass_endYear}
-                semester={this.state.createClass_semester}
                 changeProps={this.changeProps.bind(this)}
             />;
         } else if (this.state.iframeButtonControl === 2) {

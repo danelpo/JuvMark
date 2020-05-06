@@ -36,11 +36,11 @@
 }
 
 #startYearBox {
-    left:-3%;
+    left:-2%;
 }
 
-#semesterBox {
-    left:3%;
+#endYearBox {
+    left: 2%;
 }
 
 .curriculumButton {
