@@ -5,6 +5,7 @@ import SaveIcon from '@material-ui/icons/Save';
 import DataGrid from 'react-data-grid';
 import CreateNewTaskList from './CreateNewTaskList.jsx';
 import axios from 'axios';
+import validateNameInArray from '../../../functions/iframeFunctions';
 
 export default class CreateNewCurriculum extends React.Component {
 
@@ -14,8 +15,9 @@ export default class CreateNewCurriculum extends React.Component {
             allCurriculumsArray: null,
             curriculumName: null,
             columns: [{key: 'expectation', name: 'Expectation'},{key: 'desc', name: 'Description'}],
-            rows: [{expectation: "A3", desc:"This is the A3 curriculum"},{expectation: "A2", desc:"This is the A2 curriculum"},{expectation: "A1", desc:"This is the A1 curriculum"}],
+            rows: [],
             displayTaskList: false,
+            classDetails: props.classDetails,
         }
     }
     
@@ -27,50 +29,6 @@ export default class CreateNewCurriculum extends React.Component {
             }
         }
         return classCode;
-    }
-
-    validateCurriculumName = curriculumPureName => {
-        const defaultName = curriculumPureName + "_1";
-        const allCurriculums = this.state.allCurriculumsArray;
-        const allCurriculumsPureNames = this.purifyArray(allCurriculums);
-        if (allCurriculumsPureNames.includes(curriculumPureName)) {
-            const curriculumIndex = this.countHowManyInArray(allCurriculumsPureNames, curriculumPureName);
-            let indexCorrection = 0;
-            let suggestedName;
-            do {
-                indexCorrection++;
-                let index = curriculumIndex + indexCorrection;
-                suggestedName = curriculumPureName + "_" + index;
-            } while (allCurriculums.includes(suggestedName));
-            return suggestedName;
-        }
-        return defaultName;
-    }
-
-    countHowManyInArray(array, object) {
-        let frequency = 0;
-        for (let i = 0; i < array.length; i++) {
-            if(array[i] === object) {
-                frequency++;
-            }
-        }
-        return frequency;
-    }
-
-    purifyArray = dirtyArray => {
-        let pureArray = [];
-        for (let i = 0; i < dirtyArray.length; i++) {
-            let dirtyObject = dirtyArray[i];
-            let cleanObject = null;
-            let underscoreIndex = 0;
-            for (let j = 0; j < dirtyObject.length; j++) {
-                if(dirtyObject.substring(j, j+1) === "_") {
-                    underscoreIndex === 1 ? cleanObject = dirtyObject.substring(0, j) :  underscoreIndex++;
-                }
-            }
-            pureArray.push(cleanObject);
-        }
-        return pureArray;
     }
 
     componentDidMount() {
@@ -163,19 +121,28 @@ export default class CreateNewCurriculum extends React.Component {
     }
 
     saveCurriculum = () => {
-        if(this.state.rows.length > 0) {
-            axios.post(`http://localhost:8080/api/data/curriculum/newName/${this.state.curriculumName}`);
-            for(let i = 0; i < this.state.rows.length; i++) {
-                const curriculum = this.state.rows[i].expectation + "_" + this.state.rows[i].desc;
-                if(i === 0) {
-                    axios.post(`http://localhost:8080/api/data/curriculum/addCurriculum/${curriculum}/1`);
-                } else if(i === this.state.rows.length-1) {
-                    axios.post(`http://localhost:8080/api/data/curriculum/addCurriculum/${curriculum}/2`);
-                }else {
-                    axios.post(`http://localhost:8080/api/data/curriculum/addCurriculum/${curriculum}/0`);
+        if(this.state.rows.length > 1) {
+            let index = 0;
+            axios.post(`http://localhost:8080/api/data/curriculum/newName/${this.state.curriculumName}`).then(() => {
+                function request(myArray) {
+                    const curriculum = myArray[index].expectation + "_" + myArray[index].desc;
+                    let number = 0;
+                    if(index === 0) number = 1;
+                    else if(index === myArray.length-1) number = 2;
+
+                    return axios.post(`http://localhost:8080/api/data/curriculum/addCurriculum/${curriculum}/${number}`).then(() => {
+                        index++;
+                        if(index === myArray.length) {
+                            return 'done';
+                        }
+                        return request(myArray);
+                    });
                 }
-            }
-            this.setState({displayTaskList: true});
+                request(this.state.rows);
+            });
+            let updateJSON = this.state.classDetails;
+            updateJSON.curriculum = this.state.curriculumName;
+            this.setState({displayTaskList: true, classDetails: updateJSON});
         }
     }
 
@@ -183,7 +150,7 @@ export default class CreateNewCurriculum extends React.Component {
         if(!this.state.curriculumName && this.state.allCurriculumsArray) {
             let courseCode = this.courseCodeFromClassCode(this.props.classDetails.code);
             let pureCurriculumName = courseCode + "_" + this.props.classDetails.start + "-" + this.props.classDetails.end;
-            let curriculumName = this.validateCurriculumName(pureCurriculumName);
+            let curriculumName = validateNameInArray(pureCurriculumName, this.state.allCurriculumsArray);
             this.setState({curriculumName}); 
         }
 
@@ -202,7 +169,7 @@ export default class CreateNewCurriculum extends React.Component {
             );
         }
         return(
-            <CreateNewTaskList curriculumName={this.state.curriculumName} curriculum={this.state.rows}/>
+            <CreateNewTaskList classDetails={this.state.classDetails}/>
         );
     }
 }

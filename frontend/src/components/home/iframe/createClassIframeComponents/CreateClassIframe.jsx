@@ -49,13 +49,13 @@ export default class CreateClassIframe extends React.Component {
     }
 
     render() {
-        
+        /*
         let classCodeInitValue = "ICS4U-01";
         let startYearInitValue = "2019";
         let endYearInitValue = "2020";
         let semesterInitValue = "2";
-        
-        //let classCodeInitValue, startYearInitValue, endYearInitValue, semesterInitValue = null;
+        */
+        let classCodeInitValue, startYearInitValue, endYearInitValue, semesterInitValue = null;
 
         if(this.state.classCode) {
             classCodeInitValue = this.state.classCode;

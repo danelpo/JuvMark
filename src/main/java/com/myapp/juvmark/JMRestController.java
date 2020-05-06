@@ -94,7 +94,6 @@ public class JMRestController {
     @CrossOrigin(origins = "http://localhost:3000")
     public void addTask(@PathVariable("curName") String curName, @PathVariable("task") String task, @PathVariable("number") int number){
         CreateClassDataSorting.setTasks(curName, task, number);
-        System.out.println("In addTask");
     }
     
     //this allows port 3000(react/client) to post to the api

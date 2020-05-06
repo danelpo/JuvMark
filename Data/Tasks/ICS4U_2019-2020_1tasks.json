@@ -1,0 +1,13 @@
+{"Tasks":{
+	"T1":{"TaskNumber":"T1","Curriculums":["A1","B1","C1"],"Description":"des crisp"},
+	"Q1":{"TaskNumber":"Q1","Curriculums":["A2","A3","B1","C1","C3"],"Description":"descrip"},
+	"Q2":{"TaskNumber":"Q2","Curriculums":["A2","A3","B3"],"Description":"description"},
+	"T2":{"TaskNumber":"T2","Curriculums":["B3","B4","C2","D1"],"Description":"des,cription"},
+	"T3":{"TaskNumber":"T3","Curriculums":["B3","B4","C2","D1"],"Description":"des,cription"},
+	"T4":{"TaskNumber":"T4","Curriculums":["B3","B4","C2","D1"],"Description":"des,cription"},
+	"T5":{"TaskNumber":"T5","Curriculums":["B3","B4","C2","D1"],"Description":"des,cription"},
+	"T6":{"TaskNumber":"T6","Curriculums":["B3","B4","C2","D1"],"Description":"des,cription"},
+	"T7":{"TaskNumber":"T7","Curriculums":["B3","B4","C2","D1"],"Description":"des,cription"},
+	"T8":{"TaskNumber":"T8","Curriculums":["B3","B4","C2","D1"],"Description":"des,cription"},
+	"T9":{"TaskNumber":"T9","Curriculums":["B3","B4","C2","D1"],"Description":"des,cription"}
+}}

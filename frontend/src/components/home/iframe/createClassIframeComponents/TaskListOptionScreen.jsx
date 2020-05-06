@@ -138,6 +138,6 @@ export default class TaskListOptionScreen extends React.Component {
                         </div>
             );
         }
-        return <CreateNewTaskList curriculumName={this.state.curriculumName}/>
+        return <CreateNewTaskList classDetails={this.props.classDetails}/>
     }
 }

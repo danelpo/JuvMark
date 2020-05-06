@@ -2,22 +2,24 @@ import React from 'react';
 import DataGrid from 'react-data-grid';
 import SaveIcon from '@material-ui/icons/Save';
 import AddIcon from '@material-ui/icons/Add';
+import validateNameInArray from '../../../functions/iframeFunctions';
+import axios from 'axios';
 
 export default class CreateNewTaskList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            rows: [{name: "Q1", expectations: "A1, A2", desc: "lab safety quiz"}, {name: "T1", expectations: "A1, A2, A2.2, A3, A4", desc: "working in a lab test"}],
+            rows: [],
             columns: [{key: 'name', name: 'Task Name'},{key: 'expectations', name: 'Expectations'},{key: 'desc', name: 'Description'}],
             taskListName: null,
-            newCurriculum: this.props.curriculum ? true : false,
+            dirtyArray: null,
+            classDetails: null,
         }
-        console.log("new curriculum: " + this.state.newCurriculum);
     }
 
     componentDidMount() {
-        const taskListName = this.props.curriculumName + "_1";
-        this.setState({taskListName});
+        fetch(`http://localhost:8080/api/data/curriculum/${this.props.classDetails.curriculum}/tasks`).then(Response => {return Response.json()}).then(message => {
+            this.setState({dirtyArray: message})});
     }
     closePopup = () => {
         if(document.getElementById("createTaskListPopupBackground")) {
@@ -112,11 +114,56 @@ export default class CreateNewTaskList extends React.Component {
         }
     }
 
+    StringArrayToString = stringArray => {
+        let spacelessStringArray = stringArray.replace(/\s/g, "");
+        spacelessStringArray = spacelessStringArray.replace(/,/g, "-");
+        return spacelessStringArray;
+    }
+
     saveTaskList = () => {
-        alert("SAVED");
+        if(this.state.rows.length > 1 && this.props.classDetails) {
+            let index = 0;
+            axios.post(`http://localhost:8080/api/data/curriculum/newName/${this.state.taskListName}`).then(() => {
+                function request(myArray, cur, foo) {
+                    const task = myArray[index].name + "_" + foo(myArray[index].expectations) + "_" + myArray[index].desc;
+
+                    let number = 0;
+                    if(index === 0) number = 1;
+                    else if(index === myArray.length-1) number = 2;
+
+                    return axios.post(`http://localhost:8080/api/data/curriculum/addTask/${cur}/${task}/${number}`).then(() => {
+                        index++;
+                        if(index === myArray.length) {
+                            return 'done';
+                        }
+                        return request(myArray, cur, foo);
+                    });
+                }
+                request(this.state.rows, this.props.classDetails.curriculum, this.StringArrayToString);
+            });
+            let updateJSON = this.props.classDetails;
+            updateJSON.taskList = this.state.taskListName;
+            this.setState({classDetails: updateJSON});
+        }
+    }
+
+    purifyCurriculumName(dirtyCurriculumName) {
+        let cleanObject = null;
+        let underscoreIndex = 0;
+        for (let j = 0; j < dirtyCurriculumName.length; j++) {
+            if(dirtyCurriculumName.substring(j, j+1) === "_") {
+                underscoreIndex === 1 ? cleanObject = dirtyCurriculumName.substring(0, j) :  underscoreIndex++;
+            }
+        }
+        return cleanObject;
     }
     
     render() {
+        if(this.state.dirtyArray && !this.state.taskListName) {
+            const taskListName = validateNameInArray(this.purifyCurriculumName(this.props.classDetails.curriculum), this.state.dirtyArray);
+            this.setState({taskListName});
+        }
+
         let myNumber;
         if(document.body.getElementsByClassName("iframeContent")) {
             myNumber = document.body.getElementsByClassName("iframeContent")[0].getBoundingClientRect().height * 0.75;
@@ -125,7 +172,7 @@ export default class CreateNewTaskList extends React.Component {
         return(
             <div className="iframeContent">
                 <h2>Creating Task List: {this.state.taskListName}</h2>
-                <h3>With curriculum: {this.props.curriculumName}</h3>
+                <h3>With curriculum: {this.props.classDetails.curriculum}</h3>
                 <SaveIcon className="saveButtonForCreateCurriculum" style={{fontSize: 40}} onClick={() => {this.saveTaskList(this)}}/>
                 <DataGrid columns={this.state.columns} rows={this.state.rows} height={myNumber}/>
                 <AddIcon style={{fontSize: 80}} onClick={() => {this.getTaskInfo(this)}}/>
