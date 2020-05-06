@@ -5,13 +5,12 @@ public class TestingClass {
     public static void Test(){
        
         
-        /*
+        
         DirectoryInitialization.Setup();
-        CreateClassDataSorting.setSavedname("MCV4U_2019-2020_4");
-        CreateClassDataSorting.setTasks("MCV4U_2019-2020_2","T1_A1-B1-C1_des crisp", 1);
-        CreateClassDataSorting.setTasks("MCV4U_2019-2020_2","Q1_A2-A3-B1-C1-C3_descrip", 0);
-        CreateClassDataSorting.setTasks("MCV4U_2019-2020_2","Q2_A2-A3-B3_description", 0);
-        CreateClassDataSorting.setTasks("MCV4U_2019-2020_2","T2_B3-B4-C2-D1_des,cription", 2);
+        CreateClassDataSorting.setSavedname("COMM4U_2024-2025_2");
+        CreateClassDataSorting.setTasks("COMM4U_2024-2025_1","Q1_A1-A2_Lab saftey quiz", 1);
+        CreateClassDataSorting.setTasks("COMM4U_2024-2025_1","T1_A1-A2-A2.2-A3-A4_working in a lab test", 0);
+        CreateClassDataSorting.setTasks("COMM4U_2024-2025_1","T2_B3-B4-C2-D1_working in a lab test second", 2);
        //GetCurriculumAndTasks.getCurriculum("ICS4U_2019-2020_2");
        //GetCurriculumAndTasks.getSpecificTask("ICS4U_2019-2020_2", "ICS4U_2019-2020_2", "T7");
        //ListFiles.listTasks("ICS4U_2019-2020_2");

@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class JuvMarkApplication{
 
 	public static void main(String[] args) {
+		DirectoryInitialization.Setup();
 		SpringApplication.run(JuvMarkApplication.class, args);
 		TestingClass.Test();
 	}
