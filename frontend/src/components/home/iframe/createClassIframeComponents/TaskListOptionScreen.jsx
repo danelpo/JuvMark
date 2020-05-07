@@ -138,6 +138,6 @@ export default class TaskListOptionScreen extends React.Component {
                         </div>
             );
         }
-        return <CreateNewTaskList curriculumName={this.state.curriculumName}/>
+        return <CreateNewTaskList changeToConfirm={this.props.changeToConfirm} classDetails={this.props.classDetails}/>
     }
 }

@@ -36,11 +36,11 @@
 }
 
 #startYearBox {
-    left:-3%;
+    left:-2%;
 }
 
-#semesterBox {
-    left:3%;
+#endYearBox {
+    left: 2%;
 }
 
 .curriculumButton {
@@ -137,12 +137,57 @@
     background-color: white;
     border-radius: 5%;
     border: 2px solid gray;
-    align-content: center;
     text-align: center;
+    align-content: center;
 }
 
 .saveButtonForCreateCurriculum {
     position: absolute;
     top: 2%;
     right: 5%;
+}
+
+.frameDivsInCreateTaskListPopup {
+    display: inline-block;
+    width:45%;
+    height:100%;
+    position: relative;
+}
+
+#taskNameDivInCreateTaskList {
+    left: -2%
+}
+
+#taskExpectationDivInCreateTaskList {
+    left: 2%;
+}
+
+#bigDiv {
+    width: 100%;
+    height: 25%;
+    align-content: center;
+}
+
+.createTaskListPopupTextBox {
+    height: 25%;
+    width: 50%;
+    text-align: center;
+    border-radius: 5%;
+    border: 1px solid gray;
+    background-color: white;
+    font: bold 2vmin ariel,serif;
+}
+
+#descriptionTextboxInCreateTaskList {
+    height: 20%;
+    width: 65%;
+    font: normal 2vmin ariel,serif;
+    resize: none;
+}
+
+#saveUserInputInCreateTaskListButton {
+    position: relative;
+    top: 6%;
+    height: 7%;
+    width: 35%;
 }

@@ -2,6 +2,7 @@ import React from 'react';
 import '../iframeStyles.css';
 import CreateNewCurriculum from './CreateNewCurriculum.jsx';
 import LoadOldCurriculum from './LoadOldCurriculum.jsx';
+import axios from 'axios';
 
 export default class CreateClassIframe extends React.Component {
 
@@ -11,7 +12,6 @@ export default class CreateClassIframe extends React.Component {
             classCode: props.classCode,
             startYear: props.startYear,
             endYear: props.endYear,
-            semester: props.semester,
             iframeWindow: 0,
             confirmScreen: false,
             classDetails: null,
@@ -36,12 +36,6 @@ export default class CreateClassIframe extends React.Component {
             this.props.changeProps("endYear", null);
         else
             this.props.changeProps("endYear", endYearValue);
-
-        let semesterValue = document.getElementById("semesterBox").value;
-        if(semesterValue === "")
-            this.props.changeProps("semester", null);
-        else
-            this.props.changeProps("semester", semesterValue);
     }
 
     componentDidMount() {
@@ -49,13 +43,12 @@ export default class CreateClassIframe extends React.Component {
     }
 
     render() {
-        
+        /*
         let classCodeInitValue = "ICS4U-01";
         let startYearInitValue = "2019";
         let endYearInitValue = "2020";
-        let semesterInitValue = "2";
-        
-        //let classCodeInitValue, startYearInitValue, endYearInitValue, semesterInitValue = null;
+        */
+        let classCodeInitValue, startYearInitValue, endYearInitValue = null;
 
         if(this.state.classCode) {
             classCodeInitValue = this.state.classCode;
@@ -70,11 +63,6 @@ export default class CreateClassIframe extends React.Component {
         if(this.state.endYear) {
             endYearInitValue = this.state.endYear;
             this.setState({endYear: null});
-        }
-
-        if(this.state.semester) {
-            semesterInitValue = this.state.semester;
-            this.setState({semester: null});
         }
 
         let bottomHalf = null;
@@ -114,16 +102,13 @@ export default class CreateClassIframe extends React.Component {
                     onChange={() => this.apdateHomeValues()}/>
                 </div>
                 <br/>
-                <h4>Please enter school year in the designated textboxes:</h4>
+                <h4>Please enter date of semester in the designated textboxes:</h4>
                 <div className="textBoxDiv" id="yearDateDiv">
                     <input type="text" className="textBox yearDateTextBox" id="startYearBox" placeholder="Start Year (2019)"
                     value={startYearInitValue} onChange={() => this.apdateHomeValues()} />
                     
                     <input type="text" className="textBox yearDateTextBox" id="endYearBox" placeholder="End Year (2020)"
                     value={endYearInitValue} onChange={() => this.apdateHomeValues()} />
-                    
-                    <input type="text" className="textBox yearDateTextBox" id="semesterBox" placeholder="Semester (1 or 2)"
-                    value={semesterInitValue} onChange={() => this.apdateHomeValues()} />
                 </div>
                 <br/>
                 <br/>
@@ -132,7 +117,7 @@ export default class CreateClassIframe extends React.Component {
             </div>
         );
 
-        const classDetails = {code: this.props.classCode, start: this.props.startYear, end: this.props.endYear, semester :this.props.semester};
+        const classDetails = {code: this.props.classCode, start: this.props.startYear, end: this.props.endYear};
 
         let createCurriculumIframe = (
                 <CreateNewCurriculum classCode={this.props.classCode? this.props.classCode : "Class Code Not Given"}
@@ -162,32 +147,59 @@ export default class CreateClassIframe extends React.Component {
     2: old curriculum
     */
     CreateCurriculum() {
-        let arrayOfErrors = [];
-        let arrayOfLife = [
-            document.getElementById("classCodeBox"), document.getElementById("startYearBox"),
-            document.getElementById("endYearBox"), document.getElementById("semesterBox")
-        ];
-
-        for (let i = 0; i < arrayOfLife.length; i++) {
-            if(arrayOfLife[i].value === null)
-                arrayOfErrors.push(arrayOfLife[i]);
-            else if(arrayOfLife[i].value.replace(/\s/g, "") === "")
-                arrayOfErrors.push(arrayOfLife[i]);
-        }
-        if(arrayOfErrors.length !== 0) {
-            console.log("PLEASE FILL IN ALL INFORMATION");
+        if(this.whatsNotFilled().errors.length !== 0) {
+            this.highlightNotFilled(this.whatsNotFilled());
         }
         else
             this.setState({iframeWindow: 1});
     }
 
+    highlightNotFilled(bigArray) {
+        let errors = bigArray.errors;
+        let filled = bigArray.filled;
+
+        for(let i in errors) {
+            errors[i].style.border = "3px solid red";
+            errors[i].style.color = "red";
+        } for(let i in filled) {
+            filled[i].style.border = "1px solid gray";
+            filled[i].style.color = "black";
+        }
+    }
+
+    whatsNotFilled() {
+        let arrayOfErrors = [];
+        let array = [
+            document.getElementById("classCodeBox"), document.getElementById("startYearBox"), document.getElementById("endYearBox")
+        ];
+        let arrayOfLife = [];
+
+        for (let i = 0; i < array.length; i++) {
+            if(array[i].value === null)
+                arrayOfErrors.push(array[i]);
+            else if(array[i].value.replace(/\s/g, "") === "")
+                arrayOfErrors.push(array[i]);
+            else
+                arrayOfLife.push(array[i]);
+        }
+        let answer = {
+            errors: arrayOfErrors,
+            filled: arrayOfLife
+        };
+        return answer;
+    }
+
     LoadOldCurriculum() {
-        this.setState({iframeWindow: 2});
+        if(this.whatsNotFilled().errors.length !== 0) {
+            this.highlightNotFilled(this.whatsNotFilled());
+        }
+        else
+            this.setState({iframeWindow: 2});
     }
 
     changeToConfirm(classDetails) {
         this.setState({iframeWindow: 0, confirmScreen: true, classDetails: classDetails, classCode: classDetails.code,
-            startYear: classDetails.start, endYear: classDetails.end, semester: classDetails.semester});
+            startYear: classDetails.start, endYear: classDetails.end});
     }
 
     cancelConfirm() {
@@ -195,6 +207,9 @@ export default class CreateClassIframe extends React.Component {
     }
 
     saveConfirm() {
-        alert("SAVE NOT IMPLEMENTED YET");
+        const fullClassName = this.state.classDetails.code + "_" + this.state.classDetails.start + "-" + this.state.classDetails.end;
+        const task = this.state.classDetails.taskList;
+        const cur = this.state.classDetails.curriculum;
+        axios.post(`http://localhost:8080/api/data/class/createClass/${fullClassName}/${cur}/${task}`);
     }
 }

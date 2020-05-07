@@ -1,6 +1,0 @@
-{"Tasks":{
-	"A1":{"TaskNumber":"A1","Curriculums":["A1.1","A1.2","A1.3"],"Description":"Assignment 1"},
-	"T1":{"TaskNumber":"T1","Curriculums":["A1.1","A1.3","B1.2.1"],"Description":"First Test"},
-	"T2":{"TaskNumber":"T2","Curriculums":["B1.2","B2.4.5","C.2.1"],"Description":"Second Test"}
-}}
-

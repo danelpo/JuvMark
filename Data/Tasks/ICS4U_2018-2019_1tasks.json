@@ -1,6 +1,0 @@
-{"Tasks":{
-	"T3":{"TaskNumber":"T3","Curriculums":["A1","B1","C1"],"Description":"description"},
-	"Q2":{"TaskNumber":"Q2","Curriculums":["A2","A3","B1","C1","C3"],"Description":"descrip"},
-	"Q4":{"TaskNumber":"Q4","Curriculums":["A2","A3","B3"],"Description":"description"},
-	"A1":{"TaskNumber":"A1","Curriculums":["B3","B4","C2","D1"],"Description":"des,cription"}
-}}
