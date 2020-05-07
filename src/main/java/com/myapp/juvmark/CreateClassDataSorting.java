@@ -40,8 +40,8 @@ public class CreateClassDataSorting {
     }
     */
     //Will create a name for referencing
-    public static void setSavedname(String sentName) {
-        savedname = sentName;
+    public static void setSavedname(String className) {
+        savedname = className;
         JSONCurriculumPath = "Data/Curriculums/" + savedname + "curriculum.json";
         JSONTaskPath = "Data/Tasks/" + savedname + "tasks.json";
     }
@@ -50,6 +50,10 @@ public class CreateClassDataSorting {
     public static void setCurriculum(String passedCurriculum, int number) {
         String curriculumNumber;
         String description;
+
+        for (int h = 0; h < passedCurriculum.length(); h++) {
+        
+        }
 
         // Find underscore
         for (int i = 0; i < passedCurriculum.length(); i++) {
@@ -244,9 +248,9 @@ public class CreateClassDataSorting {
                 pw.flush();
                 pw.close();
     
-                System.out.println("Successfully interacted with task JSON File");
+                System.out.println("Successfully interacted with CurTaskMapping JSON File");
             } catch (final IOException e) {
-                System.out.println("Error with task JSON");
+                System.out.println("Error with CurTaskMapping JSON");
             }
 
             //Task Json

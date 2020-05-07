@@ -1,0 +1,5 @@
+{"Tasks":{
+	"Q1":{"TaskNumber":"Q1","Curriculums":["A1","A2"],"Description":"Lab saftey quiz"},
+	"T1":{"TaskNumber":"T1","Curriculums":["A1","A2","A2.2","A3","A4"],"Description":"working in a lab test"},
+	"T2":{"TaskNumber":"T2","Curriculums":["B3","B4","C2","D1"],"Description":"working in a lab test second"}
+}}

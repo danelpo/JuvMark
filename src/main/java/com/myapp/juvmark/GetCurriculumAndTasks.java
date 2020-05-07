@@ -346,7 +346,7 @@ public class GetCurriculumAndTasks {
     //Returns tasks associated with class
     public static String getTask(String id, String taskId) {
     
-        String fileName = "Data/Tasks/" + id + "tasks.json";
+        String fileName = "Data/Tasks/" + taskId + "tasks.json";
         String jsonInString = "null";
 
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
