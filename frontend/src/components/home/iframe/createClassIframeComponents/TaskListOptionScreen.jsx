@@ -93,7 +93,7 @@ export default class TaskListOptionScreen extends React.Component {
             let optionMenu, taskTable, optionButtons = null;
             if(this.state.selectOldTaskListState) {
                 optionMenu = (
-                    <Select className="loadCurriculumDropDownMenu" value={this.state.openOption} onChange={this.handleChange} options={this.options()}/>
+                    <Select className="loadCurriculumDropDownMenu" value={this.state.openOption} onChange={this.handleChange} options={this.options()} isSearchable/>
                 );
                 
                 if(this.state.openOption) {

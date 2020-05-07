@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default class PastClassIframe extends React.Component {
-
+    //use groupeOptions with 'react-select' to group past classes by semesters
     render() {
         return(
             <div>

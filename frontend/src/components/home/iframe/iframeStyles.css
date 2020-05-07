@@ -191,3 +191,21 @@
     height: 7%;
     width: 35%;
 }
+
+.chooseClassDropDownCurrent{
+    text-align: center;
+    font-size: 3vmin;
+}
+
+.currentClassIframeButton {
+    position: relative;
+    width: 30%;
+    height: 7vh;
+    top: 3vh;
+    background-color: white;
+    border-radius: 5%;
+    font:bold 3vmin ariel,serif;
+    color: black;
+    border: 1px solid gray;
+    visibility: hidden;
+}

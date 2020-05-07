@@ -1,27 +1,18 @@
 import React from 'react';
 import './App.css';
-//import {BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
+import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import HomeScreen from './components/home/HomeScreen.jsx';
+import CurrentClassHome from './components/home/currentClass/CurrentClassHome.jsx';
 
 function App() {
   return (
     <div className="App">
-      {/*<p>hello darkness my old friend</p>
       <Router>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/about">About</Link>
-            </li>
-          </ul>
-        </nav>
         <Switch>
-          <Route path="/about">
-            <HomeScreen />
-          </Route>
+          <Route path="/" exact component={HomeScreen}/>
+          <Route path="/current-class" exact component={CurrentClassHome}/>
         </Switch>
-      </Router>*/}
-      <HomeScreen />
+      </Router>
     </div>
   );
 }

@@ -51,7 +51,7 @@ export default class LoadOldCurriculum extends React.Component {
         let dropMenu, curriculumButtonDiv, viewIframe = null;
 
         if(this.state.allCurriculums) {
-            dropMenu = (<Select className="loadCurriculumDropDownMenu" value={this.state.openOption} onChange={this.handleChange} options={this.options()}/>);
+            dropMenu = (<Select className="loadCurriculumDropDownMenu" value={this.state.openOption} onChange={this.handleChange} options={this.options()} isSearchable/>);
             
             if(this.state.openOption) {
                 curriculumButtonDiv = (<div className="textBoxDiv" id="optionDropMenuDiv">

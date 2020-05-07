@@ -14,6 +14,8 @@ import org.springframework.core.Ordered;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 
@@ -106,6 +108,26 @@ public class JMRestController {
         System.out.println("creating class " + className);
         System.out.println("with curriculum " + curName);
         System.out.println("and with task list " + task);
+    }
+
+    //this is where a list of all the current classes will be
+    @GetMapping("/class/current/all")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public List<String> printAllCurrentClasses() {
+        //just for now:
+        List<String> testArray = new ArrayList<String>();
+        testArray.add("ICS4U-01_2020-2020");
+        testArray.add("ICS4U-02_2020-2020");
+        testArray.add("TEJ4M-01_2020-2020");
+        testArray.add("AWQ4M-06_2020-2020");
+        return testArray;
+    }
+
+    //this is where a list of all the past classes will be
+    @GetMapping("/class/past/all")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public String printAllPastClasses() {
+        return "all past classes";
     }
     
     //this allows port 3000(react/client) to post to the api
