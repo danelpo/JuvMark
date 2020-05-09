@@ -1,6 +1,7 @@
 import React from 'react';
 import Select from 'react-select';
-import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
+import axios from 'axios';
 
 export default class CurrentClassIframe extends React.Component {
 
@@ -9,6 +10,7 @@ export default class CurrentClassIframe extends React.Component {
         this.state = {
             openOption: null,
             classesList: [],
+            redirect: false,
         }
     }
 
@@ -26,6 +28,10 @@ export default class CurrentClassIframe extends React.Component {
         return myList;
     }
 
+    sendClassName = () => {
+        axios.post(`http://localhost:8080/api/data/class/current/open/${this.state.openOption.label}`).then(() => {this.setState({redirect: true})});
+    }
+
     render() {
         if(this.state.openOption) {
             //document.getElementsByClassName("currentClassIframeButton").forEach(button => {button.style.visibility = "hidden"});
@@ -33,14 +39,15 @@ export default class CurrentClassIframe extends React.Component {
                 button.style.visibility = "visible";
             });
         }
+        if(this.state.redirect) {
+            return <Redirect to="/current-class"/>
+        }
         return(
             <div>
                 <h1>Current Classes</h1>
                 <h2>Please select the class you would like to view</h2>
                 <Select className="chooseClassDropDownCurrent" value={this.state.openOption} onChange={this.handleChangeInOption} options={this.getOptions()}/>
-                <Link to="/current-class">
-                    <button className="currentClassIframeButton" style={{left: "-2%"}}>Continue</button>
-                </Link>
+                <button className="currentClassIframeButton" style={{left: "-2%"}} onClick={this.sendClassName}>Continue</button>
                 <button className="currentClassIframeButton" style={{left: "2%"}}>View details</button>
             </div>
         )
