@@ -1,6 +1,7 @@
 package com.myapp.juvmark;
 
 import java.util.List;
+
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -94,8 +95,8 @@ public class JMRestController {
 
     @PostMapping("/curriculum/addTask/{curName}/{task}/{number}")
     @CrossOrigin(origins = "http://localhost:3000")
-    public void addTask(@PathVariable("curName") String curName, @PathVariable("task") String task, @PathVariable("number") int number){
-        CreateClassDataSorting.setTasks(curName, task, number);
+    public void addTask(@PathVariable("task") String task, @PathVariable("number") int number){
+        CreateClassDataSorting.setTasks(task, number);
     }
 
     /*className will be in the format classCode_date. example: ICS4M-02_2019-2020 or HIV4U-08_2021-2021
@@ -105,29 +106,27 @@ public class JMRestController {
     @PostMapping("/class/createClass/{className}/{curriculumName}/{taskListName}")
     @CrossOrigin(origins = "http://localhost:3000")
     public void createNewClass(@PathVariable("className") String className, @PathVariable("curriculumName") String curName, @PathVariable("taskListName") String task){
-        System.out.println("creating class " + className);
-        System.out.println("with curriculum " + curName);
-        System.out.println("and with task list " + task);
+        CreateClassDataSorting.createClassLink(className, curName, task);
     }
 
     //this is where a list of all the current classes will be
     @GetMapping("/class/current/all")
     @CrossOrigin(origins = "http://localhost:3000")
     public List<String> printAllCurrentClasses() {
-        //just for now:
-        List<String> testArray = new ArrayList<String>();
-        testArray.add("ICS4U-01_2020-2020");
-        testArray.add("ICS4U-02_2020-2020");
-        testArray.add("TEJ4M-01_2020-2020");
-        testArray.add("AWQ4M-06_2020-2020");
-        return testArray;
+      return ListFiles.listCurrentClasses("Data/CurrentClasses");
     }
 
     //this is where a list of all the past classes will be
     @GetMapping("/class/past/all")
     @CrossOrigin(origins = "http://localhost:3000")
-    public String printAllPastClasses() {
-        return "all past classes";
+    public List<String> printAllPastClasses() {
+        return ListFiles.listPassedClasses("Data/PassedClasses");
+    }
+
+    @PostMapping("/class/current/endClass/{className}")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public void endClass(@PathVariable("className") String className){
+        PassedClassesDataSorting.endClass(className);
     }
 
 

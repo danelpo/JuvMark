@@ -136,7 +136,7 @@ public class CreateClassDataSorting {
     }
 
     // Accepts passed in tasks
-    public static void setTasks(String curName, String passedTasks, int number) {
+    public static void setTasks(String passedTasks, int number) {
         String tasknumber = "null";
         String curriculumNumbers = "null";
         String[] curriculumNumbersArray = null;
@@ -217,41 +217,6 @@ public class CreateClassDataSorting {
             }
             taskDetails.add("Curriculums", curriculumArrayJson);
             taskDetails.addProperty("Description", description);
-            
-            //CurTaskMapping Json
-            File directory = new File("Data/CurTaskMapping");
-    
-            //get all the files from a directory
-            File[] fList = directory.listFiles();
-            for (File file : fList){
-                if (file.isFile()){
-                    //System.out.println(file.getName());
-                    String temp = file.getName();
-                    
-                    if(temp.contains(curName)){
-                        file.delete();
-                        System.out.println("Deleted old mapping");
-                    }
-                }
-            }
-
-            try {
-                JSONCurTask = "Data/CurTaskMapping/" + curName + ".json" ;
-                FileWriter fw = new FileWriter(JSONCurTask, true);
-                BufferedWriter bw = new BufferedWriter(fw);
-                PrintWriter pw = new PrintWriter(bw);
-                
-                pw.println("{\"" + curName + "\":{");
-                pw.println("\t" + "\"Curriculum\"" + ":\""+ curName + "\",");
-                pw.println("\t" + "\"Task\"" + ":\""+ savedname + "\"");
-                pw.println("}}");
-                pw.flush();
-                pw.close();
-    
-                System.out.println("Successfully interacted with CurTaskMapping JSON File");
-            } catch (final IOException e) {
-                System.out.println("Error with CurTaskMapping JSON");
-            }
 
             //Task Json
             try {
@@ -325,6 +290,45 @@ public class CreateClassDataSorting {
             } catch (final IOException e) {
                 System.out.println("Error with task JSON");
             }   
+        }
+    }
+
+    public static void createClassLink(String className, String curName, String taskName){
+        
+        //CurTaskMapping Json
+        File directory = new File("Data/CurrentClasses");
+    
+        //get all the files from a directory
+        File[] fList = directory.listFiles();
+        for (File file : fList){
+            if (file.isFile()){
+                //System.out.println(file.getName());
+                String temp = file.getName();
+                
+                if(temp.contains(className)){
+                    file.delete();
+                    System.out.println("Deleted old mapping");
+                }
+            }
+        }
+
+        try {
+            JSONCurTask = "Data/CurrentClasses/" + className + ".json" ;
+            FileWriter fw = new FileWriter(JSONCurTask, true);
+            BufferedWriter bw = new BufferedWriter(fw);
+            PrintWriter pw = new PrintWriter(bw);
+            
+            pw.println("{\"" + className + "\":{");
+            pw.println("\t" + "\"Class Name\"" + ":\""+ className + "\",");
+            pw.println("\t" + "\"Curriculum\"" + ":\""+ curName + "\",");
+            pw.println("\t" + "\"Task\"" + ":\""+ taskName + "\"");
+            pw.println("}}");
+            pw.flush();
+            pw.close();
+
+            System.out.println("Successfully interacted with CurrentClasses JSON File");
+        } catch (final IOException e) {
+            System.out.println("Error with CurrentClasses JSON");
         }
     }
 }
