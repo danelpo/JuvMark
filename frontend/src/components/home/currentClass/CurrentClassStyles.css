@@ -1,0 +1,39 @@
+.studentList {
+    background-color: #f0f0f0;
+    position: absolute;
+    top: 13vh;
+    width: 21vw; /*25 - 2 padding - 2 margin = 21*/
+    height: 83vh; /*87 - 2 padding -2 margin = 83*/
+    border-radius: 1%;
+    padding-left: 1vw;
+    padding-right: 1vw;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+    margin-left: 1vw;
+    margin-right: 1vw;
+    margin-bottom: 1vh;
+    margin-top: 1vh;
+}
+
+.topBar {
+    width: 100vw;
+    height: 13vh;
+    background-color: aqua;
+}
+
+.classContent {
+    position: absolute;
+    left: 25vw;
+    width: 71vw; /*75 - 2 padding - 2 margin = 71*/
+    height: 83vh; /*87 - 2 padding -2 margin = 83*/
+    border-radius: 1%;
+    padding-left: 1vw;
+    padding-right: 1vw;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+    margin-left: 1vw;
+    margin-right: 1vw;
+    margin-bottom: 1vh;
+    margin-top: 1vh;
+    background-color: red;
+}

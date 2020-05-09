@@ -129,6 +129,24 @@ public class JMRestController {
     public String printAllPastClasses() {
         return "all past classes";
     }
+
+
+    String viewedClass = "";
+
+    //to recive current class name
+    @PostMapping("/class/current/open/{className}")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public void SendClassName(@PathVariable("className") String name) {
+        viewedClass = name;
+        updateViewedCurrentClass();
+    }
+
+    //to post currently viewed class name
+    @GetMapping("class/current/view")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public String updateViewedCurrentClass() {
+        return viewedClass;
+    }
     
     //this allows port 3000(react/client) to post to the api
     @Bean
